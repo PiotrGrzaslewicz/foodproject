@@ -34,8 +34,8 @@ CREATE TABLE IF NOT EXISTS `scrumlab`.`recipe` (
   `preparation` TEXT NULL COMMENT 'Sposób przygotowania.',
   `admin_id` INT NOT NULL COMMENT 'Klucz obcy tabeli admins.',
   PRIMARY KEY (`id`),
-  INDEX `fk_recipie_admins1_idx` (`admin_id` ASC),
-  CONSTRAINT `fk_recipie_admins1`
+  INDEX `fk_recipe_admins1_idx` (`admin_id` ASC),
+  CONSTRAINT `fk_recipe_admins1`
     FOREIGN KEY (`admin_id`)
     REFERENCES `scrumlab`.`admins` (`id`)
     ON DELETE NO ACTION
