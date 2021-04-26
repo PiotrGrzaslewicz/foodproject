@@ -1,6 +1,7 @@
 package pl.coderslab.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Plan {
 
@@ -59,5 +60,10 @@ public class Plan {
 
     public void setAdminId(int adminId) {
         this.adminId = adminId;
+    }
+
+    @Override
+    public String toString(){
+        return id + " " + name + " " + description + " " + created.format(DateTimeFormatter.ISO_DATE_TIME) + " " + adminId;
     }
 }
