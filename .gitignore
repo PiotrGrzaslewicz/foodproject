@@ -16,3 +16,5 @@ _site/
 *.logs
 .idea/
 .eclipse
+
+src/main/java/pl/coderslab/web/mockservlet.java
