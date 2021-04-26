@@ -19,7 +19,7 @@ public class AdminDao {
     private static final String UPDATE_USER_QUERY = "UPDATE admins SET first_name = ?, last_name = ?," +
             "email = ?, password = ? WHERE id = ?";
 
-    public Admin create(Admin admin) {
+    public int create(Admin admin) {
 
         try (Connection conn = DbUtil.getConnection()) {
             PreparedStatement stm = conn.prepareStatement(CREATE_USER_QUERY, Statement.RETURN_GENERATED_KEYS);
@@ -30,16 +30,16 @@ public class AdminDao {
             stm.executeUpdate();
             ResultSet resultSet = stm.getGeneratedKeys();
             if (resultSet.next()) {
-                admin.setId(resultSet.getInt(1));
+                resultSet.getInt(1);
             }
-            return admin;
+            return 0;
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
+            return 0;
         }
     }
 
-    public void delete(int adminId) {
+    public int deleteAdmin(int adminId) {
 
         try (Connection conn = DbUtil.getConnection()) {
             PreparedStatement stm = conn.prepareStatement(DELETE_USER_QUERY);
@@ -50,8 +50,11 @@ public class AdminDao {
             if (!deleted) {
                 throw new NotFoundException("Nie udało się usunąć");
             }
+            return stm.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
+            return 0;
         }
     }
 
@@ -75,7 +78,7 @@ public class AdminDao {
         return adminList;
     }
 
-    public Admin read(int adminId) {
+    public Admin readById(int adminId) {
 
         Admin admin = new Admin();
         try (Connection conn = DbUtil.getConnection()) {
@@ -95,15 +98,17 @@ public class AdminDao {
         return admin;
     }
 
-    public void update(Admin admin) {
+    public int updateAdmin(Admin admin) {
         try (Connection conn = DbUtil.getConnection()) {
             PreparedStatement stm = conn.prepareStatement(UPDATE_USER_QUERY);
             stm.setInt(4, admin.getId());
             stm.setString(1, admin.getFirstName());
             stm.setString(2, admin.getLastName());
             stm.setString(3, admin.getEmail());
+            return stm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            return 0;
         }
     }
 
