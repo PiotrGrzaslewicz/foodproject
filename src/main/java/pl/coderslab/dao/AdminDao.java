@@ -19,7 +19,7 @@ public class AdminDao {
     private static final String UPDATE_USER_QUERY = "UPDATE admins SET first_name = ?, last_name = ?," +
             "email = ?, password = ? WHERE id = ?";
 
-    public int create(Admin admin) {
+    public int createAdmin(Admin admin) {
 
         try (Connection conn = DbUtil.getConnection()) {
             PreparedStatement stm = conn.prepareStatement(CREATE_USER_QUERY, Statement.RETURN_GENERATED_KEYS);
