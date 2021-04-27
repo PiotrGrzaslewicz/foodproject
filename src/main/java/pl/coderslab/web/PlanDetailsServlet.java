@@ -1,16 +1,14 @@
 package pl.coderslab.web;
 
 import pl.coderslab.dao.PlanDao;
-import pl.coderslab.model.DayName;
-import pl.coderslab.model.Meal;
 import pl.coderslab.model.Plan;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
-import java.util.TreeMap;
 
 @WebServlet(name = "PlanDetailsServlet", value = "/app/plan/details")
 public class PlanDetailsServlet extends HttpServlet {

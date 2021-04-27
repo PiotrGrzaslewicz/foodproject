@@ -1,7 +1,5 @@
 package pl.coderslab.model;
 
-import java.util.TreeMap;
-
 public class DayName implements Comparable<DayName>{
 
     private int id;
