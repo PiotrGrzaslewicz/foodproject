@@ -1,6 +1,5 @@
 package pl.coderslab.dao;
 
-import org.mindrot.jbcrypt.BCrypt;
 import pl.coderslab.exception.NotFoundException;
 import pl.coderslab.model.Admin;
 import pl.coderslab.utils.DbUtil;
@@ -27,7 +26,7 @@ public class AdminDao {
             stm.setString(1, admin.getFirstName());
             stm.setString(2, admin.getLastName());
             stm.setString(3, admin.getEmail());
-            stm.setString(4, hashPassword(admin.getPassword()));
+            stm.setString(4, admin.getPassword());
             stm.setString(5, String.valueOf(admin.getSuperAdmin()));
             stm.executeUpdate();
             ResultSet resultSet = stm.getGeneratedKeys();
@@ -136,10 +135,4 @@ public class AdminDao {
             return 0;
         }
     }
-
-    public String hashPassword(String password) {
-
-        return BCrypt.hashpw(password, BCrypt.gensalt(12));
-    }
-
 }

@@ -1,5 +1,7 @@
 package pl.coderslab.model;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 public class Admin {
 
     private int id;
@@ -20,11 +22,12 @@ public class Admin {
         this.id = id;
     }
 
-    public Admin(String firstName, String lastName, String email, String password, int superAdimn) {
+    public Admin(String firstName, String lastName, String email, String password, int superAdmin) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.superAdmin = superAdmin;
     }
 
     public String getFirstName() {
@@ -56,7 +59,7 @@ public class Admin {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = hashPassword(password);
     }
 
     public int getSuperAdmin() {
@@ -70,5 +73,9 @@ public class Admin {
     @Override
     public String toString(){
         return id + " " + firstName + " " + lastName + " " + email + " " + password + " " + superAdmin;
+    }
+    public String hashPassword(String password) {
+
+        return BCrypt.hashpw(password, BCrypt.gensalt(12));
     }
 }
