@@ -18,6 +18,7 @@ public class AdminDao {
     private static final String READ_USERS_QUERY = "SELECT * FROM admins WHERE id = ?";
     private static final String UPDATE_USER_QUERY = "UPDATE admins SET first_name = ?, last_name = ?," +
             "email = ?, password = ? WHERE id = ?";
+    private static final String FIND_BY_EMAIL_QUERY = "SELECT * FROM admins WHERE email = ?";
 
     public int createAdmin(Admin admin) {
 
@@ -31,7 +32,7 @@ public class AdminDao {
             stm.executeUpdate();
             ResultSet resultSet = stm.getGeneratedKeys();
             if (resultSet.next()) {
-                resultSet.getInt(1);
+                return resultSet.getInt(1);
             }
             return 0;
         } catch (SQLException e) {
@@ -45,7 +46,6 @@ public class AdminDao {
         try (Connection conn = DbUtil.getConnection()) {
             PreparedStatement stm = conn.prepareStatement(DELETE_USER_QUERY);
             stm.setInt(1, adminId);
-            stm.executeUpdate();
 
             boolean deleted = stm.execute();
             if (!deleted) {
@@ -80,7 +80,28 @@ public class AdminDao {
         return adminList;
     }
 
-    public Admin readById(int adminId) {
+    public Admin findByEmail(String email) {
+
+        Admin admin = new Admin();
+        try (Connection conn = DbUtil.getConnection()) {
+            PreparedStatement stm = conn.prepareStatement(FIND_BY_EMAIL_QUERY);
+            stm.setString(1, email);
+            try (ResultSet resultSet = stm.executeQuery()) {
+                while (resultSet.next()) {
+                    admin.setId(resultSet.getInt("id"));
+                    admin.setFirstName(resultSet.getString("first_name"));
+                    admin.setLastName(resultSet.getString("last_name"));
+                    admin.setEmail(resultSet.getString("email"));
+                    admin.setSuperAdmin(resultSet.getInt("superadmin"));
+                }
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return admin;
+    }
+
+    public Admin findById(int adminId) {
 
         Admin admin = new Admin();
         try (Connection conn = DbUtil.getConnection()) {
@@ -104,10 +125,10 @@ public class AdminDao {
     public int updateAdmin(Admin admin) {
         try (Connection conn = DbUtil.getConnection()) {
             PreparedStatement stm = conn.prepareStatement(UPDATE_USER_QUERY);
-            stm.setInt(4, admin.getId());
             stm.setString(1, admin.getFirstName());
             stm.setString(2, admin.getLastName());
             stm.setString(3, admin.getEmail());
+            stm.setString(4, admin.getPassword());
             stm.setInt(5, admin.getSuperAdmin());
             return stm.executeUpdate();
         } catch (SQLException e) {
