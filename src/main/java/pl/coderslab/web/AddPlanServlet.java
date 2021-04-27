@@ -28,7 +28,7 @@ public class AddPlanServlet extends HttpServlet {
         plan.setAdminId((Integer) request.getSession().getAttribute("clientId"));
         plan.setName(request.getParameter("name"));
         plan.setDescription(request.getParameter("description"));
-        if((new PlanDao()).createPlan(plan) > 0) response.sendRedirect("/app/schedules");
+        if((new PlanDao()).createPlan(plan) > 0) response.sendRedirect("/app/plan/list");
         else response.getWriter().append("Something went wrong...");
     }
 }
