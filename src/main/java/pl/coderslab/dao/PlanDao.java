@@ -107,4 +107,24 @@ public class PlanDao {
         plan.setAdminId(set.getInt("admin_id"));
         return plan;
     }
+
+    public Plan getLastPlan(int id){
+        Plan plan = null;
+        String sql = "SELECT day_name.name as day_name, meal_name,  recipe.name as recipe_name, recipe.description as recipe_description\n" +
+                "            FROM recipe_plan\n" +
+                "            JOIN day_name on day_name.id=day_name_id\n" +
+                "            JOIN recipe on recipe.id=recipe_id WHERE\n" +
+                "            recipe_plan.plan_id =  (SELECT MAX(id) from plan WHERE admin_id = ?)\n" +
+                "            ORDER by day_name.display_order, recipe_plan.display_order;";
+        try(PreparedStatement stmt = DbUtil.getConnection().prepareStatement(sql)){
+            stmt.setInt(1, id);
+            ResultSet set = stmt.executeQuery();
+            if (set.next()){
+                plan = buildFromSet(set);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return plan;
+    }
 }
