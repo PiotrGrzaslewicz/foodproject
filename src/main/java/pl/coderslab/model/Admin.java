@@ -7,6 +7,7 @@ public class Admin {
     private String lastName;
     private String email;
     private String password;
+    private int superAdmin;
 
     public Admin() {
     }
@@ -19,7 +20,7 @@ public class Admin {
         this.id = id;
     }
 
-    public Admin(String firstName, String lastName, String email, String password) {
+    public Admin(String firstName, String lastName, String email, String password, int superAdimn) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -58,8 +59,16 @@ public class Admin {
         this.password = password;
     }
 
+    public int getSuperAdmin() {
+        return superAdmin;
+    }
+
+    public void setSuperAdmin(int superAdmin) {
+        this.superAdmin = superAdmin;
+    }
+
     @Override
     public String toString(){
-        return id + " " + firstName + " " + lastName + " " + email + " " + password;
+        return id + " " + firstName + " " + lastName + " " + email + " " + password + " " + superAdmin;
     }
 }

@@ -11,8 +11,8 @@ import java.util.List;
 
 public class AdminDao {
 
-    private static final String CREATE_USER_QUERY = "INSERT INTO admins(first_name, last_name, email, password)" +
-            "VALUES (?, ?, ?, ?)";
+    private static final String CREATE_USER_QUERY = "INSERT INTO admins(first_name, last_name, email, password, superadmin)" +
+            "VALUES (?, ?, ?, ?, ?)";
     private static final String DELETE_USER_QUERY = "DELETE FROM admins WHERE id = ?";
     private static final String FIND_ALL_USERS_QUERY = "SELECT * FROM admins";
     private static final String READ_USERS_QUERY = "SELECT * FROM admins WHERE id = ?";
@@ -27,6 +27,7 @@ public class AdminDao {
             stm.setString(2, admin.getLastName());
             stm.setString(3, admin.getEmail());
             stm.setString(4, hashPassword(admin.getPassword()));
+            stm.setString(5, String.valueOf(admin.getSuperAdmin()));
             stm.executeUpdate();
             ResultSet resultSet = stm.getGeneratedKeys();
             if (resultSet.next()) {
@@ -70,6 +71,7 @@ public class AdminDao {
                 adminToAdd.setFirstName(resultSet.getString("first_name"));
                 adminToAdd.setLastName(resultSet.getString("last_name"));
                 adminToAdd.setEmail(resultSet.getString("email"));
+                adminToAdd.setSuperAdmin(resultSet.getInt("superadmin"));
                 adminList.add(adminToAdd);
             }
         } catch (SQLException e) {
@@ -90,6 +92,7 @@ public class AdminDao {
                     admin.setFirstName(resultSet.getString("first_name"));
                     admin.setLastName(resultSet.getString("last_name"));
                     admin.setEmail(resultSet.getString("email"));
+                    admin.setSuperAdmin(resultSet.getInt("superadmin"));
                 }
             }
         } catch (SQLException e) {
@@ -105,6 +108,7 @@ public class AdminDao {
             stm.setString(1, admin.getFirstName());
             stm.setString(2, admin.getLastName());
             stm.setString(3, admin.getEmail());
+            stm.setInt(5, admin.getSuperAdmin());
             return stm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
