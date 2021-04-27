@@ -24,8 +24,8 @@ public class DayNameDao {
             while (resultSet.next()) {
                 DayName dayName = new DayName();
                 dayName.setId(resultSet.getInt("id"));
-                dayName.setName(resultSet.getString("day"));
-                dayName.setDisplayOrder(resultSet.getInt("displayOrder"));
+                dayName.setName(resultSet.getString("name"));
+                dayName.setDisplayOrder(resultSet.getInt("display_order"));
                 dayNames.add(dayName);
             }
 
