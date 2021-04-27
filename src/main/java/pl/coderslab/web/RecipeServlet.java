@@ -17,10 +17,10 @@ public class RecipeServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         request.setAttribute("component", "/app/recipe/recipelist.jsp");
-        request.setAttribute("clientName", session.getAttribute("clientName"));
+        request.setAttribute("adminName", session.getAttribute("adminName"));
 
         RecipeDAO recipeDAO = new RecipeDAO();
-        List<Recipe> recipes = recipeDAO.findAllByAdmin(Integer.parseInt((String) session.getAttribute("clientId")));
+        List<Recipe> recipes = recipeDAO.findAllByAdmin((Integer) session.getAttribute("adminId"));
         recipes.sort(Comparator.comparing(Recipe::getCreated).reversed());
         request.setAttribute("recipes", recipes);
         getServletContext().getRequestDispatcher("/app/frame.jsp").forward(request, response);
@@ -28,6 +28,6 @@ public class RecipeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request,response);
     }
 }
