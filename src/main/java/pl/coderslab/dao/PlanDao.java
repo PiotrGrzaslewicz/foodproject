@@ -1,5 +1,6 @@
 package pl.coderslab.dao;
 
+import pl.coderslab.model.Admin;
 import pl.coderslab.model.Plan;
 import pl.coderslab.utils.DbUtil;
 
@@ -126,6 +127,25 @@ public class PlanDao {
             e.printStackTrace();
         }
         return plan;
+    }
+
+    public int numberOfPlansByAdminId (int id) {
+        String sql = "select count(*) as count from plan where admin_id = ?";
+        int number = 0;
+
+        try (PreparedStatement stmt = DbUtil.getConnection().prepareStatement(sql)) {
+            stmt.setInt(1,id);
+            ResultSet resultSet = stmt.executeQuery();
+
+            if (resultSet.first()) {
+                number = resultSet.getInt("count");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return number;
     }
 }
 //
