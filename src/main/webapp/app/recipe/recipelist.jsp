@@ -50,9 +50,9 @@
 
                             <%--                    TODO podmienić linki na działające - USUŃ SZCZEGÓŁY EDYTUJ--%>
 
-                        <a href="/app/recipe/delete?${recipe.id}" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
-                        <a href="/app/recipe/details?${recipe.id}" class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>
-                        <a href="/app/recipe/edit?${recipe.id}" class="btn btn-warning rounded-0 text-light m-1">Edytuj</a>
+                        <a href="/app/recipe/delete?id=${recipe.id}" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
+                        <a href="/app/recipe/details?id=${recipe.id}" class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>
+                        <a href="/app/recipe/edit?id=${recipe.id}" class="btn btn-warning rounded-0 text-light m-1">Edytuj</a>
                     </td>
                 </tr>
             </c:forEach>
