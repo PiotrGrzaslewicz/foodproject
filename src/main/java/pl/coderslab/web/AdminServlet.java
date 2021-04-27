@@ -15,9 +15,6 @@ import java.util.List;
 public class AdminServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        AdminDao adminDao = new AdminDao();
-        List<Admin> admins = adminDao.findAll();
-        System.out.println(admins);
 
         getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
     }
