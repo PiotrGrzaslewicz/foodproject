@@ -13,35 +13,69 @@ public class RecipeDAO {
     //ZAPYTANIA SQL
     private static final String READ_RECIPE_QUERY = "SELECT * from recipe where id = ?;";
     private static final String FIND_ALL_RECIPES_QUERY = "SELECT * FROM recipe;";
+    private static final String FIND_ALL_RECIPES_BY_ADMIN_QUERY = "SELECT * FROM recipe where admin_id = ?;";
     private static final String CREATE_RECIPE_QUERY = "INSERT INTO recipe(name, ingredients, description, created, updated, preparation_time, preparation, admin_id) VALUES (?,?,?, ?, ?, ?, ?, ?);";
     private static final String DELETE_RECIPE_QUERY = "DELETE FROM recipe where id = ?;";
     private static final String UPDATE_RECIPE_QUERY = "UPDATE recipe SET name = ? , ingredients = ?, description = ?, created = ?, updated = ?, preparation_time = ?, preparation = ?, admin_id = ? WHERE id = ?;";
 
+//    public Recipe read(Integer recipeId) {
+//        Recipe recipe = new Recipe();
+//
+//        try (Connection connection = DbUtil.getConnection();
+//             PreparedStatement statement = connection.prepareStatement(READ_RECIPE_QUERY)
+//        ) {
+//
+//            statement.setInt(1, recipeId);
+//            try (ResultSet resultSet = statement.executeQuery()) {
+//
+//                while (resultSet.next()) {
+//                    recipe.setId(resultSet.getInt("id"));
+//                    recipe.setName(resultSet.getString("name"));
+//                    recipe.setIngredients(resultSet.getString("ingredients"));
+//                    recipe.setDescription(resultSet.getString("description"));
+//                    recipe.setCreated(resultSet.getTimestamp("created"));
+//                    recipe.setUpdated(resultSet.getTimestamp("updated"));
+//                    recipe.setPreparationTime(resultSet.getInt("preparation_time"));
+//                    recipe.setPreparation(resultSet.getString("preparation"));
+//                    recipe.setAdminId(resultSet.getInt("admin_id"));
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return recipe;
+//    }
+
     public Recipe read(Integer recipeId) {
-        Recipe recipe = new Recipe();
+        Recipe recipe = null;
 
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(READ_RECIPE_QUERY)
         ) {
-
             statement.setInt(1, recipeId);
             try (ResultSet resultSet = statement.executeQuery()) {
 
-                while (resultSet.next()) {
-                    recipe.setId(resultSet.getInt("id"));
-                    recipe.setName(resultSet.getString("name"));
-                    recipe.setIngredients(resultSet.getString("ingredients"));
-                    recipe.setDescription(resultSet.getString("description"));
-                    recipe.setCreated(resultSet.getTimestamp("created"));
-                    recipe.setUpdated(resultSet.getTimestamp("updated"));
-                    recipe.setPreparationTime(resultSet.getInt("preparation_time"));
-                    recipe.setPreparation(resultSet.getString("preparation"));
-                    recipe.setAdminId(resultSet.getInt("admin_id"));
+                if (resultSet.next()) {
+                    recipe = buildFromSet(resultSet);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return recipe;
+    }
+
+    private Recipe buildFromSet(ResultSet resultSet) throws SQLException {
+        Recipe recipe = new Recipe();
+        recipe.setId(resultSet.getInt("id"));
+        recipe.setName(resultSet.getString("name"));
+        recipe.setIngredients(resultSet.getString("ingredients"));
+        recipe.setDescription(resultSet.getString("description"));
+        recipe.setCreated(resultSet.getTimestamp("created"));
+        recipe.setUpdated(resultSet.getTimestamp("updated"));
+        recipe.setPreparationTime(resultSet.getInt("preparation_time"));
+        recipe.setPreparation(resultSet.getString("preparation"));
+        recipe.setAdminId(resultSet.getInt("admin_id"));
         return recipe;
     }
 
@@ -54,24 +88,31 @@ public class RecipeDAO {
         ) {
 
             while (resultSet.next()) {
-                Recipe recipeToAdd = new Recipe();
-                recipeToAdd.setId(resultSet.getInt("id"));
-                recipeToAdd.setName(resultSet.getString("name"));
-                recipeToAdd.setIngredients(resultSet.getString("ingredients"));
-                recipeToAdd.setDescription(resultSet.getString("description"));
-                recipeToAdd.setCreated(resultSet.getTimestamp("created"));
-                recipeToAdd.setUpdated(resultSet.getTimestamp("updated"));
-                recipeToAdd.setPreparationTime(resultSet.getInt("preparation_time"));
-                recipeToAdd.setPreparation(resultSet.getString("preparation"));
-                recipeToAdd.setAdminId(resultSet.getInt("admin_id"));
-
-                recipeList.add(recipeToAdd);
+                recipeList.add(buildFromSet(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return recipeList;
+    }
+
+    public List<Recipe> findAllByAdmin(int adminId) {
+        List<Recipe> allRecipesByAdmin = new ArrayList<>();
+
+        try (PreparedStatement stmt = DbUtil.getConnection().prepareStatement(FIND_ALL_RECIPES_BY_ADMIN_QUERY);
+        ) { stmt.setInt(1,adminId);
+            ResultSet resultSet = stmt.executeQuery();
+
+            while (resultSet.next()) {
+                allRecipesByAdmin.add(buildFromSet(resultSet));
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return allRecipesByAdmin;
     }
 
     public Recipe create(Recipe recipe) {
