@@ -16,7 +16,7 @@ public class PlanDetailsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Plan plan = (new PlanDao()).getById(Integer.parseInt(request.getParameter("id")));
         request.setAttribute("plan", plan);
-        request.setAttribute("details", plan.getDetails().entrySet());
+        request.setAttribute("details", plan.getDetails());
         request.setAttribute("component", "/app/plan/details.jsp");
         getServletContext().getRequestDispatcher("/app/frame.jsp").forward(request, response);
     }

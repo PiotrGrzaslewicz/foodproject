@@ -12,12 +12,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "addPlanServlet", value = "/app/plan/add")
-public class AddPlanServlet extends HttpServlet {
+public class PlanAddServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        request.setAttribute("component", "/app/plan/addplan.jsp");
-        request.setAttribute("clientName", session.getAttribute("clientName"));
+        request.setAttribute("component", "/app/plan/add.jsp");
         getServletContext().getRequestDispatcher("/app/frame.jsp").forward(request, response);
     }
 
@@ -25,7 +23,7 @@ public class AddPlanServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Plan plan = new Plan();
         request.setCharacterEncoding("UTF-8");
-        plan.setAdminId((Integer) request.getSession().getAttribute("clientId"));
+        plan.setAdminId((Integer) request.getSession().getAttribute("adminId"));
         plan.setName(request.getParameter("name"));
         plan.setDescription(request.getParameter("description"));
         if((new PlanDao()).createPlan(plan) > 0) response.sendRedirect("/app/plan/list");
