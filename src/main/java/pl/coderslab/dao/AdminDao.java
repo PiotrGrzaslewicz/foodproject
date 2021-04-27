@@ -26,7 +26,7 @@ public class AdminDao {
             stm.setString(1, admin.getFirstName());
             stm.setString(2, admin.getLastName());
             stm.setString(3, admin.getEmail());
-            stm.setString(4, admin.getPassword());
+            stm.setString(4, admin.hashAndSetPassword());
             stm.setString(5, String.valueOf(admin.getSuperAdmin()));
             stm.executeUpdate();
             ResultSet resultSet = stm.getGeneratedKeys();
@@ -45,13 +45,7 @@ public class AdminDao {
         try (Connection conn = DbUtil.getConnection()) {
             PreparedStatement stm = conn.prepareStatement(DELETE_USER_QUERY);
             stm.setInt(1, adminId);
-
-            boolean deleted = stm.execute();
-            if (!deleted) {
-                throw new NotFoundException("Nie udało się usunąć");
-            }
             return stm.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
             return 0;
