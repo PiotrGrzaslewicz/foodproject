@@ -44,93 +44,33 @@
                     </div>
                 </div>
             </div>
-
-            <table class="table">
-                <thead>
-                <tr class="d-flex">
-                    <th class="col-2">Poniedziałek</th>
-                    <th class="col-7"></th>
-                    <th class="col-1"></th>
-                    <th class="col-2"></th>
-                </tr>
-                </thead>
-                <tbody class="text-color-lighter">
-                <tr class="d-flex">
-                    <td class="col-2">śniadanie</td>
-                    <td class="col-7">płatki owsiane z jagodami i komosą ryżową</td>
-                    <td class="col-1 center">
-                        <a href="#" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
-                    </td>
-                    <td class="col-2 center">
-                        <a href="app-details-schedules.html" class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>
-                    </td>
-                </tr>
-                <tr class="d-flex">
-                    <td class="col-2">śniadanie</td>
-                    <td class="col-7">płatki owsiane z jagodami i komosą ryżową</td>
-                    <td class="col-1 center">
-                        <a href="#" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
-                    </td>
-                    <td class="col-2 center">
-                        <a href="app-details-schedules.html" class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>
-                    </td>
-                </tr>
-                <tr class="d-flex">
-                    <td class="col-2">śniadanie</td>
-                    <td class="col-7">płatki owsiane z jagodami i komosą ryżową</td>
-                    <td class="col-1 center">
-                        <a href="#" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
-                    </td>
-                    <td class="col-2 center">
-                        <a href="app-details-schedules.html" class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
-            <table class="table">
-                <thead>
-                <tr class="d-flex">
-                    <th class="col-2">Poniedziałek</th>
-                    <th class="col-7"></th>
-                    <th class="col-1"></th>
-                    <th class="col-2"></th>
-                </tr>
-                </thead>
-                <tbody class="text-color-lighter">
-                <tr class="d-flex">
-                    <td class="col-2">śniadanie</td>
-                    <td class="col-7">płatki owsiane z jagodami i komosą ryżową</td>
-                    <td class="col-1 center">
-                        <a href="#" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
-                    </td>
-                    <td class="col-2 center">
-                        <a href="app-details-schedules.html" class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>
-                    </td>
-                </tr>
-                <tr class="d-flex">
-                    <td class="col-2">śniadanie</td>
-                    <td class="col-7">płatki owsiane z jagodami i komosą ryżową</td>
-                    <td class="col-1 center">
-                        <a href="#" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
-                    </td>
-                    <td class="col-2 center">
-                        <a href="app-details-schedules.html" class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>
-                    </td>
-                </tr>
-                <tr class="d-flex">
-                    <td class="col-2">śniadanie</td>
-                    <td class="col-7">płatki owsiane z jagodami i komosą ryżową</td>
-                    <td class="col-1 center">
-                        <a href="#" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
-                    </td>
-                    <td class="col-2 center">
-                        <a href="app-details-schedules.html" class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
+            <c:forEach items="${details}" var="entry">
+                <table class="table">
+                    <thead>
+                    <tr class="d-flex">
+                        <th class="col-2">${entry.key.name}</th>
+                        <th class="col-7"></th>
+                        <th class="col-1"></th>
+                        <th class="col-2"></th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-color-lighter">
+                    <c:forEach items="${entry.value}" var="meal">
+                        <tr class="d-flex">
+                            <td class="col-2">${meal.mealName}</td>
+                            <td class="col-7">${meal.recipeName}</td>
+                            <td class="col-1 center">
+                                <a href="#" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
+                            </td>
+                            <td class="col-2 center">
+                                <a href="/app/recipe/details?id=${meal.recipeId}"
+                                   class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </c:forEach>
         </div>
     </div>
 </div>

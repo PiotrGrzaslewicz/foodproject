@@ -1,6 +1,8 @@
 package pl.coderslab.model;
 
-public class DayName {
+import java.util.TreeMap;
+
+public class DayName implements Comparable<DayName>{
 
     private int id;
     private String name;
@@ -47,5 +49,10 @@ public class DayName {
 
     public void setDisplayOrder(int displayOrder) {
         this.displayOrder = displayOrder;
+    }
+
+    @Override
+    public int compareTo(DayName o) {
+        return this.displayOrder - o.displayOrder;
     }
 }
