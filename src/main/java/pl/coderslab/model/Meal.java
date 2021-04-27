@@ -16,7 +16,6 @@ public class Meal implements Comparable<Meal>{
     private String recipeName;
     private String mealName;
     private int displayOrder;
-    private DayName day;
 
     private Meal() {
     }
@@ -41,10 +40,6 @@ public class Meal implements Comparable<Meal>{
         return displayOrder;
     }
 
-    public DayName getDay() {
-        return day;
-    }
-
     public static TreeMap<DayName, List<Meal>> getForPlan(int planId){
         Map<Integer, DayName> days = (new DayNameDao()).findAll().stream().collect(Collectors.toMap(DayName::getId, Function.identity()));
         String sql ="SELECT rp.id, rp.recipe_id, r.name, rp.meal_name, rp.display_order, rp.day_name_id\n" +
@@ -61,12 +56,12 @@ public class Meal implements Comparable<Meal>{
                 meal.recipeName = set.getString("name");
                 meal.mealName = set.getString("meal_name");
                 meal.displayOrder = set.getInt("display_order");
-                meal.day = days.get(set.getInt("day_name_id"));
-                if(map.containsKey(meal.getDay())) map.get(meal.getDay()).add(meal);
+                DayName day = days.get(set.getInt("day_name_id"));
+                if(map.containsKey(day)) map.get(day).add(meal);
                 else {
                     ArrayList<Meal> list = new ArrayList<>();
                     list.add(meal);
-                    map.put(meal.getDay(), list);
+                    map.put(day, list);
                 }
             }
             for(List<Meal> list : map.values()){
@@ -81,10 +76,5 @@ public class Meal implements Comparable<Meal>{
     @Override
     public int compareTo(Meal meal) {
         return this.displayOrder - meal.displayOrder;
-    }
-
-    @Override
-    public String toString(){
-        return recipeName + " " + mealName + " " + displayOrder + " " + day.getName();
     }
 }
