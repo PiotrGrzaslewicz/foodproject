@@ -2,6 +2,7 @@ package pl.coderslab.model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 
 public class Plan {
 
@@ -60,6 +61,10 @@ public class Plan {
 
     public void setAdminId(int adminId) {
         this.adminId = adminId;
+    }
+
+    public Map<Integer, Meal> getDetails(){
+        return null;
     }
 
     @Override
