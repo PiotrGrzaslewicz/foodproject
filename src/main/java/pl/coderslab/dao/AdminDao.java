@@ -85,6 +85,7 @@ public class AdminDao {
                     admin.setFirstName(resultSet.getString("first_name"));
                     admin.setLastName(resultSet.getString("last_name"));
                     admin.setEmail(resultSet.getString("email"));
+                    admin.setPassword(resultSet.getString("password"));
                     admin.setSuperAdmin(resultSet.getInt("superadmin"));
                 }
             }
