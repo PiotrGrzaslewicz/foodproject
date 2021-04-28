@@ -24,8 +24,8 @@ public class DashboardServlet extends HttpServlet {
         HttpSession session = request.getSession();
         int id = (Integer) session.getAttribute("adminId");
         Plan lastPlan = planDao.getLastPlan(id);
-request.setAttribute("numberAddedPlans", planDao.numberOfPlansByAdminId(id));
-request.setAttribute("numberAddedRecipes", recipeDAO.numberOfRecipesByAdminId(id));
+        request.setAttribute("numberAddedPlans", planDao.numberOfPlansByAdminId(id));
+        request.setAttribute("numberAddedRecipes", recipeDAO.numberOfRecipesByAdminId(id));
         request.setAttribute("plan", lastPlan);
         request.setAttribute("details", lastPlan.getDetails());
         request.setAttribute("component", "/app/dashboard.jsp");
