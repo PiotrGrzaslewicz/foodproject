@@ -30,7 +30,6 @@ public class EditAdminDataServlet extends HttpServlet {
         admin.setFirstName(request.getParameter("firstName"));
         admin.setLastName(request.getParameter("lastName"));
         admin.setEmail(request.getParameter("email"));
-        System.out.println(admin.toString());
         adminDao.updateAdmin(admin);
         response.sendRedirect("/app/dashboard");
     }
