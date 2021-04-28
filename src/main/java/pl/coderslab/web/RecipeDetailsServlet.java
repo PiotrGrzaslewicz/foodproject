@@ -13,7 +13,6 @@ public class RecipeDetailsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         request.setAttribute("component", "/app/recipe/details.jsp");
-        request.setAttribute("adminName", session.getAttribute("adminName"));
         int id = Integer.parseInt(request.getParameter("id"));
         RecipeDAO recipeDAO = new RecipeDAO();
         request.setAttribute("recipe",recipeDAO.read(id));
