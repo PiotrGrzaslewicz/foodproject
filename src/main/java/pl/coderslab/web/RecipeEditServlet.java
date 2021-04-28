@@ -36,10 +36,8 @@ public class RecipeEditServlet extends HttpServlet {
         recipe.setPreparation(request.getParameter("preparation"));
         recipe.setIngredients(request.getParameter("ingredients"));
         recipe.setAdminId( (Integer) session.getAttribute("adminId"));
-        System.out.println(recipe.toString());
 
         recipeDAO.update(recipe);
-        System.out.println("update attempt");
         response.sendRedirect("/app/recipe/list");
     }
 }
