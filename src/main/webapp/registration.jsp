@@ -22,7 +22,7 @@
                 <!-- fix action, method -->
                 <!-- add name attribute for all inputs -->
                 <form action="/register" method="post" class="padding-small text-center">
-                    <div style="color: #FF0000;">${errorMsg}</div>
+                    <div style="color: #FF0000;">${errorMsg3}</div>
                     <h1 class="text-color-darker">Rejestracja</h1>
                     <div class="form-group">
                         <input type="text" class="form-control" id="name" name="name" placeholder="podaj imię">
@@ -31,9 +31,11 @@
                         <input type="text" class="form-control" id="surname" name="surname" placeholder="podaj nazwisko">
                     </div>
                     <div class="form-group">
+                        <div style="color: #FF0000;">${errorMsg}</div>
                         <input type="text" class="form-control" id="email" name="email" placeholder="podaj email">
                     </div>
                     <div class="form-group">
+                        <div style="color: #FF0000;">${errorMsg2}</div>
                         <input type="password" class="form-control" id="password" name="password" placeholder="podaj hasło">
                     </div>
                     <div class="form-group">
