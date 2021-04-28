@@ -457,3 +457,29 @@ margin: 0 auto !important;
 .schedules-content-header {
   margin-bottom: 50px;
 }
+
+/*------------------------------*/
+/*---- Question ----*/
+/*------------------------------*/
+
+.centered {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.q-icon{
+  width: 30%;
+  height: 30%;
+  padding: 5%;
+  background: radial-gradient(closest-side, yellow, white);
+}
+
+.q-btn-cont{
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
+}
+.q-button{
+  width: 45%;
+}
