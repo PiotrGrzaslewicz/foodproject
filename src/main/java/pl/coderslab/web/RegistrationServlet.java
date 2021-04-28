@@ -37,20 +37,30 @@ public class RegistrationServlet extends HttpServlet {
         admin.setLastName(lastName);
         admin.setEmail(email);
         admin.setPassword(pass);
-        adminDao.findByEmail(email);
-        if (admin.getEmail().equals(email)) {
+
+        Admin checkAdmin = adminDao.findByEmail(email);
+
+        if (checkAdmin.getId() > 0) {
+
             String errorMsg = "Użytkownik o podanym mailu już istnieje";
             req.setAttribute("errorMsg", errorMsg);
             getServletContext().getRequestDispatcher("/registration.jsp").forward(req, resp);
+
         }else if(firstName == null || lastName == null || email == null || pass == null || pass2 == null){
+
             String errorMsg3 = "Należy wypełnić wszystkie pola";
             req.setAttribute("errorMsg3", errorMsg3);
             getServletContext().getRequestDispatcher("/registration.jsp").forward(req, resp);
+
         }else{
+
             if (pass.equals(pass2)) {
+
                 adminDao.createAdmin(admin);
                 getServletContext().getRequestDispatcher("/login").forward(req, resp);
+
             } else {
+
                 String errorMsg2 = "Podane hasła nie są identyczne";
                 req.setAttribute("errorMsg2",errorMsg2);
                 getServletContext().getRequestDispatcher("/registration.jsp").forward(req, resp);
