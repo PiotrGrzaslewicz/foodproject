@@ -18,11 +18,11 @@
     <div class="dashboard-content border-dashed p-3 m-4 view-height">
         <div class="row border-bottom border-3 p-1 m-1">
             <div class="col noPadding">
-                <h3 class="color-header text-uppercase">USUNIĘCIE PRZEPISU</h3>
+                <h3 class="color-header text-uppercase">USUNIĘCIE PLANU</h3>
             </div>
             <div class="col d-flex justify-content-end mb-2 noPadding">
-                <a href="/app/recipe/delete?id=${recipe.id}&confirm=1" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
-                <a href="/app/recipe/list" class="btn btn-info rounded-0 text-light m-1">Anuluj</a>
+                <a href="/app/plan/delete?id=${plan.id}&confirm=1" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
+                <a href="/app/plan/list" class="btn btn-info rounded-0 text-light m-1">Anuluj</a>
             </div>
         </div>
 
@@ -30,19 +30,19 @@
             <div class="schedules-content-header">
                 <div class="form-group row">
                                 <span class="col-sm-2 label-size col-form-label">
-                                    Nazwa przepisu
+                                    Nazwa planu
                                 </span>
                     <div class="col-sm-10">
-                        <p class="schedules-text">${recipe.name}</p>
+                        <p class="schedules-text">${plan.name}</p>
                     </div>
                 </div>
                 <div class="form-group row">
                                 <span class="col-sm-2 label-size col-form-label">
-                                    Opis przepisu
+                                    Opis planu
                                 </span>
                     <div class="col-sm-10">
                         <p class="schedules-text">
-                            ${recipe.description}
+                            ${plan.description}
                         </p>
                     </div>
                 </div>
