@@ -17,8 +17,10 @@ public class PlanDeleteServlet extends HttpServlet {
         if (request.getParameter("confirm")==null) {
             int id = Integer.parseInt(request.getParameter("id"));
             PlanDao dao = new PlanDao();
-            request.setAttribute("plan", dao.getById(id));
-            request.setAttribute("component", "/app/plan/delete.jsp");
+            request.setAttribute("message", dao.getById(id).getName());
+            request.setAttribute("okAction", "/app/plan/delete?id=" + id + "&confirm=1");
+            request.setAttribute("cancelAction", "/app/plan/list");
+            request.setAttribute("component", "/app/question.jsp");
             getServletContext().getRequestDispatcher("/app/frame.jsp").forward(request, response);
         } else if (request.getParameter("confirm").equals("1")) {
             int id = Integer.parseInt(request.getParameter("id"));

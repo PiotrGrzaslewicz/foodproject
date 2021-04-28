@@ -11,13 +11,13 @@ import java.io.IOException;
 public class DeleteRecipeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-
         if (request.getParameter("confirm")==null) {
             int id = Integer.parseInt(request.getParameter("id"));
             RecipeDAO recipeDAO = new RecipeDAO();
-            request.setAttribute("recipe", recipeDAO.read(id));
-            request.setAttribute("component", "/app/recipe/delete.jsp");
+            request.setAttribute("message", recipeDAO.read(id).getName());
+            request.setAttribute("okAction", "/app/recipe/delete?id=" + id + "&confirm=1");
+            request.setAttribute("cancelAction", "/app/recipe/list");
+            request.setAttribute("component", "/app/question.jsp");
             getServletContext().getRequestDispatcher("/app/frame.jsp").forward(request, response);
         } else if (request.getParameter("confirm").equals("1")) {
             int id = Integer.parseInt(request.getParameter("id"));
