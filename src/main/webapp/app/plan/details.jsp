@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="m-4 p-3 width-medium ">
-    <div class="dashboard-content border-dashed p-3 m-4">
+    <div class="dashboard-content border-dashed p-3 m-4 view-height">
         <div class="row border-bottom border-3 p-1 m-1">
             <div class="col noPadding">
                 <h3 class="color-header text-uppercase">SZCZEGÓŁY PLANU</h3>
