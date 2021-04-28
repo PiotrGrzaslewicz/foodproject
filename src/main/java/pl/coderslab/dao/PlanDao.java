@@ -87,10 +87,10 @@ public class PlanDao {
         return list;
     }
 
-    public int deletePlan(Plan plan){
+    public int deletePlan(int planId){
         String sql = "DELETE FROM plan WHERE id = ?";
         try(PreparedStatement stmt = DbUtil.getConnection().prepareStatement(sql)){
-            stmt.setInt(1, plan.getId());
+            stmt.setInt(1, planId);
             return stmt.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
