@@ -14,7 +14,6 @@ public class AddRecipeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        request.setAttribute("adminName", session.getAttribute("adminName"));
         request.setAttribute("component", "/app/recipe/add.jsp");
         getServletContext().getRequestDispatcher("/app/frame.jsp").forward(request, response);
     }

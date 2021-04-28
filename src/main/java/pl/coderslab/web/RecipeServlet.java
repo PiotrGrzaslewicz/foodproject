@@ -17,7 +17,6 @@ public class RecipeServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         request.setAttribute("component", "/app/recipe/recipelist.jsp");
-        request.setAttribute("adminName", session.getAttribute("adminName"));
 
         RecipeDAO recipeDAO = new RecipeDAO();
         List<Recipe> recipes = recipeDAO.findAllByAdmin((Integer) session.getAttribute("adminId"));

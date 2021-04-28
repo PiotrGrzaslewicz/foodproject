@@ -12,7 +12,6 @@ public class DeleteRecipeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        request.setAttribute("adminName", session.getAttribute("adminName"));
 
         if (request.getParameter("confirm")==null) {
             int id = Integer.parseInt(request.getParameter("id"));
