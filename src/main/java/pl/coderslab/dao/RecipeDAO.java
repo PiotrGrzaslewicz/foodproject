@@ -172,7 +172,8 @@ public class RecipeDAO {
 
         int number = 0;
         try (Connection connection = DbUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(NUMBER_OF_RECIPES_ADDED_BY_ADMIN);
+             PreparedStatement statement = connection.prepareStatement(NUMBER_OF_RECIPES_ADDED_BY_ADMIN, ResultSet.TYPE_SCROLL_SENSITIVE,
+                     ResultSet.CONCUR_UPDATABLE);
         ) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
