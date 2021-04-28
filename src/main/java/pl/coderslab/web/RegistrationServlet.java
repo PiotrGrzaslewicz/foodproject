@@ -1,6 +1,7 @@
-package pl.coderslab.model;
+package pl.coderslab.web;
 
 import pl.coderslab.dao.AdminDao;
+import pl.coderslab.model.Admin;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/register")
-public class Registration extends HttpServlet {
+public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
