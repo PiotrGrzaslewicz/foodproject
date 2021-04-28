@@ -1,6 +1,5 @@
 package pl.coderslab.web;
 
-import pl.coderslab.dao.PlanDao;
 import pl.coderslab.model.Plan;
 
 import javax.servlet.*;
@@ -11,11 +10,11 @@ import java.util.Comparator;
 import java.util.List;
 
 @WebServlet(name = "ListPlanServlet", value = "/app/plan/list")
-public class ListPlanServlet extends HttpServlet {
+public class PlanListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        List<Plan> list = (new PlanDao()).getByAdminId((Integer)session.getAttribute("clientId"));
+        List<Plan> list = (new PlanDao()).getByAdminId((Integer)session.getAttribute("adminId"));
         list.sort(Comparator.comparing(Plan :: getCreated).reversed());
         request.setAttribute("plans", list);
         request.setAttribute("component", "/app/plan/list.jsp");

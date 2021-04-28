@@ -23,7 +23,7 @@
             Zaplanuj <span>Jedzonko</span>
         </a>
         <div class="d-flex justify-content-around">
-            <h4 class="text-light mr-3">${clientName}</h4>
+            <h4 class="text-light mr-3">${adminName}</h4>
             <div class="circle-div text-center"><i class="fas fa-user icon-user"></i></div>
         </div>
     </nav>
@@ -39,7 +39,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="app/recipe/list">
+                <a class="nav-link" href="/app/recipe/list">
                     <span>Przepisy</span>
                     <i class="fas fa-angle-right"></i>
                 </a>

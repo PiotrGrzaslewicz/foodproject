@@ -1,7 +1,6 @@
 package pl.coderslab.web;
 
 import pl.coderslab.dao.CreateLastPlan;
-import pl.coderslab.dao.PlanDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

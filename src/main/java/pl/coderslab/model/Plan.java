@@ -2,6 +2,8 @@ package pl.coderslab.model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.TreeMap;
 
 public class Plan {
 
@@ -60,6 +62,10 @@ public class Plan {
 
     public void setAdminId(int adminId) {
         this.adminId = adminId;
+    }
+
+    public TreeMap<DayName, List<Meal>> getDetails(){
+        return Meal.getForPlan(this.id);
     }
 
     @Override
