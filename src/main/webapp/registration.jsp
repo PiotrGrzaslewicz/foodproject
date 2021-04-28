@@ -22,6 +22,7 @@
                 <!-- fix action, method -->
                 <!-- add name attribute for all inputs -->
                 <form action="/register" method="post" class="padding-small text-center">
+                    <div style="color: #FF0000;">${errorMsg}</div>
                     <h1 class="text-color-darker">Rejestracja</h1>
                     <div class="form-group">
                         <input type="text" class="form-control" id="name" name="name" placeholder="podaj imię">

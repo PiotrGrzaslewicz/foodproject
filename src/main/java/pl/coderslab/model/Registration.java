@@ -15,7 +15,7 @@ public class Registration extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        getServletContext().getRequestDispatcher("registration.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/registration.jsp").forward(req, resp);
 
     }
 
@@ -24,6 +24,7 @@ public class Registration extends HttpServlet {
 
         Admin admin = new Admin();
         AdminDao adminDao = new AdminDao();
+        resp.setContentType("text/html;charset=UTF-8");
 
         String firstName = req.getParameter("name");
         String lastName = req.getParameter("surname");
@@ -35,11 +36,18 @@ public class Registration extends HttpServlet {
         admin.setLastName(lastName);
         admin.setEmail(email);
         admin.setPassword(pass);
-        if (pass.equals(pass2)) {
-            adminDao.createAdmin(admin);
-            getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
+        adminDao.findByEmail(email);
+        if (admin.getEmail().equals(email)) {
+            String errorMsg = "Użytkownik o podanym mailu już istnieje";
+            req.setAttribute("errorMsg", errorMsg);
         }else{
-            resp.getWriter().println("Podane hasła nie są identyczne");
+            if (pass.equals(pass2)) {
+                adminDao.createAdmin(admin);
+                getServletContext().getRequestDispatcher("/login").forward(req, resp);
+            } else {
+                String errorMsg = "Podane hasła nie są identyczne";
+                req.setAttribute("errorMsg",errorMsg);
+            }
         }
     }
 }
