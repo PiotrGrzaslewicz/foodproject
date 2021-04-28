@@ -25,6 +25,7 @@ public class AuthorizationFilter implements Filter {
             HttpServletResponse resp = (HttpServletResponse) response;
             resp.sendRedirect("/login");
         } else {
+            request.setCharacterEncoding("UTF-8");
             response.setContentType("text/html;charset=utf-8");
             request.setAttribute("adminId", session.getAttribute("adminId"));
             request.setAttribute("adminName", session.getAttribute("adminName"));
