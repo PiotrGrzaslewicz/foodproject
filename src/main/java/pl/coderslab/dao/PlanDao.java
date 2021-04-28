@@ -1,17 +1,13 @@
 package pl.coderslab.dao;
-
 import pl.coderslab.model.Admin;
 import pl.coderslab.model.Plan;
 import pl.coderslab.utils.DbUtil;
-
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
 public class PlanDao {
-
     public int createPlan(Plan plan){
         String sql = "INSERT INTO plan VALUES (NULL, ?, ?, ?, ?)";
         try(PreparedStatement stmt = DbUtil.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
@@ -29,7 +25,6 @@ public class PlanDao {
             return 0;
         }
     }
-
     public int updatePlan(Plan plan){
         String sql = "UPDATE plan SET name = ?, description = ? WHERE id = ?";
         try(PreparedStatement stmt = DbUtil.getConnection().prepareStatement(sql)){
@@ -42,7 +37,6 @@ public class PlanDao {
             return 0;
         }
     }
-
     public Plan getById(int id){
         Plan plan = null;
         String sql = "SELECT * FROM plan WHERE id = ?";
@@ -57,7 +51,6 @@ public class PlanDao {
         }
         return plan;
     }
-
     public List<Plan> getAll(){
         List<Plan> list = new ArrayList<>();
         String sql = "SELECT * FROM plan";
@@ -71,7 +64,6 @@ public class PlanDao {
         }
         return list;
     }
-
     public List<Plan> getByAdminId(int adminId){
         List<Plan> list = new ArrayList<>();
         String sql = "SELECT * FROM plan WHERE admin_id = ?";
@@ -87,6 +79,7 @@ public class PlanDao {
         return list;
     }
 
+
     public int deletePlan(int planId){
         String sql = "DELETE FROM plan WHERE id = ?";
         try(PreparedStatement stmt = DbUtil.getConnection().prepareStatement(sql)){
@@ -97,7 +90,6 @@ public class PlanDao {
             return 0;
         }
     }
-
     private Plan buildFromSet(ResultSet set) throws SQLException{
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         Plan plan = new Plan();
@@ -108,15 +100,9 @@ public class PlanDao {
         plan.setAdminId(set.getInt("admin_id"));
         return plan;
     }
-
     public Plan getLastPlan(int id){
         Plan plan = null;
-        String sql = "SELECT day_name.name as day_name, meal_name,  recipe.name as recipe_name, recipe.description as recipe_description\n" +
-                "            FROM recipe_plan\n" +
-                "            JOIN day_name on day_name.id=day_name_id\n" +
-                "            JOIN recipe on recipe.id=recipe_id WHERE\n" +
-                "            recipe_plan.plan_id =  (SELECT MAX(id) from plan WHERE admin_id = ?)\n" +
-                "            ORDER by day_name.display_order, recipe_plan.display_order;";
+        String sql = "select * from plan where admin_id = ? order by created desc limit 1;";
         try(PreparedStatement stmt = DbUtil.getConnection().prepareStatement(sql)){
             stmt.setInt(1, id);
             ResultSet set = stmt.executeQuery();
@@ -128,24 +114,18 @@ public class PlanDao {
         }
         return plan;
     }
-
     public int numberOfPlansByAdminId (int id) {
         String sql = "select count(*) as count from plan where admin_id = ?";
         int number = 0;
-
         try (PreparedStatement stmt = DbUtil.getConnection().prepareStatement(sql)) {
             stmt.setInt(1,id);
             ResultSet resultSet = stmt.executeQuery();
-
             if (resultSet.first()) {
                 number = resultSet.getInt("count");
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return number;
     }
 }
-//
