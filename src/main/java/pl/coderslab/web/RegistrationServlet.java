@@ -14,14 +14,14 @@ import java.io.IOException;
 public class RegistrationServlet extends HttpServlet {
 
     @Override
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         getServletContext().getRequestDispatcher("/registration.jsp").forward(req, resp);
 
     }
 
     @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         Admin admin = new Admin();
         AdminDao adminDao = new AdminDao();
