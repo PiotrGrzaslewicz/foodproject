@@ -46,7 +46,7 @@
             </div>
         </div>
     </div>
-    <div class="m-4 p-4 border-dashed">
+    <div class="m-4 p-4 border-dashed view-height">
         <h2 class="dashboard-content-title">
             <span>Ostatnio dodany plan:</span> ${plan.name}
         </h2>
