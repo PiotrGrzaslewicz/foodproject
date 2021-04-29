@@ -43,7 +43,7 @@
         <tbody class="text-color-lighter">
         <c:forEach items="${results}" var="recipe">
             <tr class="d-flex">
-                <th scope="row" class="col-1">1</th>
+                <th scope="row" class="col-1">${recipe.id}</th>
                 <td class="col-5">
                     ${recipe.name}
                 </td>
