@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/login")
@@ -23,13 +24,8 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Admin admin = new Admin();
-
         String email = req.getParameter("email");
         String pass = req.getParameter("password");
-
-        admin.setEmail(email);
-        admin.setPassword(pass);
 
         AdminDao adminDao = new AdminDao();
 
@@ -41,9 +37,9 @@ public class LoginServlet extends HttpServlet {
         req.setAttribute("errorMsg", errorMsg);
         getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
 
-        }else if (!checkAdmin.getEmail().equals(email)) {
+        }else if (checkAdmin.getPassword() == null) {
 
-            String errorMsg = "Niepoprawny email. Spróbuj ponownie";
+            String errorMsg = "Użytkownik nie istnieje. Spróbuj ponownie";
             req.setAttribute("errorMsg1", errorMsg);
             getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
 
@@ -54,7 +50,13 @@ public class LoginServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
 
         }else{
+
+            HttpSession session = req.getSession();
+            session.setAttribute("adminId", checkAdmin.getId());
+            session.setAttribute("adminName", checkAdmin.getFirstName());
+            session.setAttribute("superAdmin", checkAdmin.getSuperAdmin());
             getServletContext().getRequestDispatcher("/app/dashboard").forward(req, resp);
+
         }
     }
 }
