@@ -57,7 +57,7 @@ public class RegistrationServlet extends HttpServlet {
             if (pass.equals(pass2)) {
 
                 adminDao.createAdmin(admin);
-                getServletContext().getRequestDispatcher("/login").forward(req, resp);
+                resp.sendRedirect("/login");
 
             } else {
 
