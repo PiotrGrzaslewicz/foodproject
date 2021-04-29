@@ -26,6 +26,8 @@
                     </div>
                 </div>
 
+
+                <div style="color: #FF0000;">${errorMsg}</div>
                 <table class="table borderless">
                     <tbody>
                     <tr class="d-flex">
