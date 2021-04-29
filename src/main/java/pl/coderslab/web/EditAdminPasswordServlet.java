@@ -17,7 +17,6 @@ public class EditAdminPasswordServlet extends HttpServlet {
         int id = ((Integer) session.getAttribute("adminId"));
         AdminDao adminDao = new AdminDao();
         Admin admin = adminDao.findById(id);
-        request.setAttribute("admin", admin);
         getServletContext().getRequestDispatcher("/app/frame.jsp").forward(request, response);
     }
 
