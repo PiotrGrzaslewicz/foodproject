@@ -10,6 +10,7 @@ public class Admin {
     private String email;
     private String password;
     private int superAdmin;
+    private int enable;
 
     public Admin() {
     }
@@ -77,10 +78,18 @@ public class Admin {
 
     @Override
     public String toString(){
-        return id + " " + firstName + " " + lastName + " " + email + " " + password + " " + superAdmin;
+        return id + " " + firstName + " " + lastName + " " + email + " " + password + " " + superAdmin + "" + enable;
     }
     public String hashPassword(String password) {
 
         return BCrypt.hashpw(password, BCrypt.gensalt(12));
+    }
+
+    public void setEnable(int enabled) {
+        this.enable = enabled;
+    }
+
+    public int getEnable() {
+        return enable;
     }
 }

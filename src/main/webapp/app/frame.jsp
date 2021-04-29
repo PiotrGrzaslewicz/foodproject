@@ -51,7 +51,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/app/edit-user-data">
+                <a class="nav-link" href="/app/edit-admin-data">
                     <span>Edytuj dane</span>
                     <i class="fas fa-angle-right"></i>
                 </a>
