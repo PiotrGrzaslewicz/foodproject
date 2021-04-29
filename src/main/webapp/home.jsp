@@ -112,10 +112,12 @@
             <div class="col-5">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control border-0 rounded-0" placeholder=""
-                           aria-label="Recipient's username" aria-describedby="basic-addon2">
+                           aria-label="Recipient's username" aria-describedby="basic-addon3">
                     <div class="input-group-append">
-                        <button class="input-group-text btn-color border-0 rounded-0" type="submit" id="basic-addon2">
+
+                        <button class="input-group-text btn-color border-0 rounded-0" type="submit" id="basic-addon3">
                             <a href="index.html">Zapisz się</a>
+
                         </button>
                     </div>
                 </div>
@@ -143,6 +145,7 @@
         </div>
     </div>
 </section>
+
 
 <%@ include file="jspf/footer.jsp"%>
 

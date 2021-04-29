@@ -1,14 +1,18 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 
 <section class="last-info-section padding-small" id="contact">
     <div class="container">
         <div class="row">
             <div class="col">
+
                 <h3 class="mb-4">Kontakt</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.  Aliquam erat volutpat. Donec placerat nisl magna.</p>
             </div>
             <div class="col pl-4 ml-4">
                 <h3 class="mb-4">Jakaś treść</h3>
+
                 <ul class="container">
                     <li>consectetur adipiscing elit</li>
                     <li>sed do eiusmod tempor</li>

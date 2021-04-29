@@ -26,12 +26,14 @@ public class DashboardServlet extends HttpServlet {
         Plan lastPlan = planDao.getLastPlan(id);
         request.setAttribute("numberAddedPlans", planDao.numberOfPlansByAdminId(id));
         request.setAttribute("numberAddedRecipes", recipeDAO.numberOfRecipesByAdminId(id));
-        request.setAttribute("plan", lastPlan);
-        request.setAttribute("details", lastPlan.getDetails());
+        if (lastPlan == null) {
+            request.setAttribute("errorMsg", "Na razie nie masz dodanych żadnych planów");
+        } else {
+            request.setAttribute("plan", lastPlan);
+            request.setAttribute("details", lastPlan.getDetails());
+        }
         request.setAttribute("component", "/app/dashboard.jsp");
-
-        getServletContext().getRequestDispatcher("/app/frame.jsp")
-                .forward(request, response);
+        getServletContext().getRequestDispatcher("/app/frame.jsp").forward(request, response);
     }
 
     @Override
