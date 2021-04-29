@@ -107,16 +107,16 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1>Zapisz się na newsletter</h1>
+                <h1>Znajdź przepis</h1>
             </div>
             <div class="col-5">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control border-0 rounded-0" placeholder=""
+                    <input type="text" class="form-control border-0 rounded-0" placeholder="Podaj nazwę przepisu"
                            aria-label="Recipient's username" aria-describedby="basic-addon3">
                     <div class="input-group-append">
 
                         <button class="input-group-text btn-color border-0 rounded-0" type="submit" id="basic-addon3">
-                            <a href="index.html">Zapisz się</a>
+                            <a href="index.html">Szukaj</a>
 
                         </button>
                     </div>

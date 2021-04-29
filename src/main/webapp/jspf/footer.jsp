@@ -21,13 +21,13 @@
                 </ul>
             </div>
             <div class="col">
-                <h3 class="mb-4">Znajdź użytkownika</h3>
+                <h3 class="mb-4">Zapisz się na newsletter</h3>
                 <div class="input-group mb-3">
                     <input type="text" class="form-control border-0 rounded-0" placeholder=""
                            aria-label="Recipient's username" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                         <button class="input-group-text btn-color border-0 rounded-0" type="submit" id="basic-addon2"><a
-                                href="index.html">Znajdź</a></button>
+                                href="index.html">Zapisz się</a></button>
                     </div>
                 </div>
                 <div class="container d-flex-row">
