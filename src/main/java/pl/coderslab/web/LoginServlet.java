@@ -16,13 +16,13 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String email = req.getParameter("email");
         String pass = req.getParameter("password");
@@ -55,8 +55,8 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("adminId", checkAdmin.getId());
             session.setAttribute("adminName", checkAdmin.getFirstName());
             session.setAttribute("superAdmin", checkAdmin.getSuperAdmin());
-            getServletContext().getRequestDispatcher("/app/dashboard").forward(req, resp);
-
+            //getServletContext().getRequestDispatcher("/app/dashboard").forward(req, resp);
+            resp.sendRedirect("/app/dashboard");
         }
     }
 }
