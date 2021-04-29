@@ -55,8 +55,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("adminId", checkAdmin.getId());
             session.setAttribute("adminName", checkAdmin.getFirstName());
             session.setAttribute("superAdmin", checkAdmin.getSuperAdmin());
-            getServletContext().getRequestDispatcher("/app/dashboard").forward(req, resp);
-
+            resp.sendRedirect("/app/dashboard");
         }
     }
 }
