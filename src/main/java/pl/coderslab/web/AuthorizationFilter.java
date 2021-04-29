@@ -1,5 +1,8 @@
 package pl.coderslab.web;
 
+import pl.coderslab.dao.AdminDao;
+import pl.coderslab.model.Admin;
+
 import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +31,10 @@ public class AuthorizationFilter implements Filter {
             request.setCharacterEncoding("UTF-8");
             response.setContentType("text/html;charset=utf-8");
             request.setAttribute("adminId", session.getAttribute("adminId"));
-            request.setAttribute("adminName", session.getAttribute("adminName"));
+            AdminDao adminDao = new AdminDao();
+            String adminFirstName = adminDao.findById((Integer) session.getAttribute("adminId")).getFirstName();
+            session.setAttribute("adminName", adminFirstName);
+            request.setAttribute("adminName", adminFirstName);
             chain.doFilter(request, response);
         }
     }
