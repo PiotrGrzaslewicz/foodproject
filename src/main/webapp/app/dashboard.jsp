@@ -48,7 +48,7 @@
     </div>
     <div class="m-4 p-4 border-dashed">
         <h2 class="dashboard-content-title">
-            <span>Ostatnio dodany plan:</span> ${plan.name}
+            <span>Ostatnio dodany plan:</span> ${plan.name} ${errorMsg}
         </h2>
         <c:forEach items="${details}" var="entry">
             <table class="table">
