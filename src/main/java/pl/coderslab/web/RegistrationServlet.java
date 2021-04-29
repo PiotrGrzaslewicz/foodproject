@@ -25,6 +25,7 @@ public class RegistrationServlet extends HttpServlet {
 
         Admin admin = new Admin();
         AdminDao adminDao = new AdminDao();
+        req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
         String firstName = req.getParameter("name");
