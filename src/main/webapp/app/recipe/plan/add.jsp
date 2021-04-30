@@ -77,13 +77,9 @@
                     </label>
                     <div class="col-sm-2">
                         <select name="day">
-                            <option value="1">poniedziałek</option>
-                            <option value="2">wtorek</option>
-                            <option value="3">środa</option>
-                            <option value="4">czwartek</option>
-                            <option value="5">piątek</option>
-                            <option value="6">sobota</option>
-                            <option value="7">niedziela</option>
+                            <c:forEach items="${dayName}" var="dayName">
+                                <option value="${dayName.id}">${dayName.name}</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </div>
