@@ -23,8 +23,26 @@
 
 <section>
     <div class="row padding-small">
-        <i class="fas fa-users icon-users"></i>
-        <h1>Przepisy naszych użytkowników:</h1>
+        <div class="top-element">
+            <div class="flex-row">
+                <i class="fas fa-users icon-users"></i>
+                <h1>Przepisy naszych użytkowników:</h1>
+            </div>
+            <form action="/recipes" method="get" class="flex-row align-baseline">
+                <label class="m-3">Szukaj w:</label>
+                <input type="checkbox" name="columns" value="name" class="checkbox" checked>
+                <label>tytuł</label>
+                <input type="checkbox" name="columns" value="description" class="checkbox" checked>
+                <label>opis</label>
+                <input type="checkbox" name="columns" value="ingredients" class="checkbox" checked>
+                <label>składniki</label>
+                <div class="flex-row align-center m-2">
+                    <input type="text" name="searchTxt" class="search-height">
+                    <button type="submit" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4 search-height"><i
+                            class="fa fa-search"></i></button>
+                </div>
+            </form>
+        </div>
         <hr>
         <div class="orange-line w-100"></div>
     </div>
@@ -45,7 +63,7 @@
             <tr class="d-flex">
                 <th scope="row" class="col-1">${recipe.id}</th>
                 <td class="col-5">
-                    ${recipe.name}
+                        ${recipe.name}
                 </td>
                 <td class="col-5">${recipe.description}
                 </td>
