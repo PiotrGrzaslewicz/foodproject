@@ -84,10 +84,9 @@ public class AddRecipeToPlan extends HttpServlet {
 
         addrecipetoplan(recipeId, meal, disOrder, day, planId);
 
-        request.setAttribute("component", "/app/recipe/plan/add.jsp");
 
-        getServletContext().getRequestDispatcher("/app/frame.jsp")
-                .forward(request, response);
+
+        response.sendRedirect("/app/recipe/plan/add");
     }
 
 
