@@ -2,6 +2,7 @@ package pl.coderslab.dao;
 
 import pl.coderslab.model.DayName;
 import pl.coderslab.utils.DbUtil;
+import pl.coderslab.utils.EntityFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,21 +15,15 @@ public class DayNameDao {
 
     private static final String FIND_ALL_BOOKS_QUERY = "SELECT * FROM day_name;";
 
+    private EntityFactory<DayName> factory = new EntityFactory<>(DayName.class);
+
     public List<DayName> findAll() {
         List<DayName> dayNames = new ArrayList<>();
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_ALL_BOOKS_QUERY);
              ResultSet resultSet = statement.executeQuery()) {
-
-            while (resultSet.next()) {
-                DayName dayName = new DayName();
-                dayName.setId(resultSet.getInt("id"));
-                dayName.setName(resultSet.getString("name"));
-                dayName.setDisplayOrder(resultSet.getInt("display_order"));
-                dayNames.add(dayName);
-            }
-
-        } catch (SQLException e) {
+            dayNames = factory.getAsList(resultSet);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return dayNames;
