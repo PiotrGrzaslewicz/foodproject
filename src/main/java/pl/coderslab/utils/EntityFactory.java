@@ -49,6 +49,6 @@ public class EntityFactory<T> {
 
     private String fieldToSetter(String fieldName) {
         char firstChar = fieldName.charAt(0);
-        return "set" + fieldName.replace(firstChar, Character.toUpperCase(firstChar));
+        return "set" + fieldName.replaceFirst(String.valueOf(firstChar), String.valueOf(Character.toUpperCase(firstChar)));
     }
 }
