@@ -13,7 +13,7 @@ import java.util.List;
 
 public class DayNameDao {
 
-    private static final String FIND_ALL_BOOKS_QUERY = "SELECT * FROM day_name;";
+    private static final String FIND_ALL_BOOKS_QUERY = "SELECT * FROM day_name ORDER BY display_order ASC;";
 
     private EntityFactory<DayName> factory = new EntityFactory<>(DayName.class);
 
