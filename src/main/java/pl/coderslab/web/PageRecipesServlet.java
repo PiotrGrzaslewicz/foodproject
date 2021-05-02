@@ -21,10 +21,18 @@ public class PageRecipesServlet extends HttpServlet {
             list = (new RecipeDAO()).findAll();
             Comparator<Recipe> comparator = (r1, r2) -> r2.getUpdated().compareTo(r1.getUpdated());
             list.sort(comparator);
+            request.setAttribute("name", "checked");
+            request.setAttribute("description", "checked");
+            request.setAttribute("ingredients", "checked");
+            request.setAttribute("preparation", "checked");
         }
         else {
             Search<Recipe> search = new Search<>(Recipe.class, "recipe");
             list = search.inColumns(request.getParameter("searchTxt"), request.getParameterMap().get("columns"));
+            for (String key : request.getParameterMap().get("columns")){
+                request.setAttribute(key, "checked");
+            }
+            request.setAttribute("queryTxt", request.getParameter("searchTxt"));
         }
         request.setAttribute("results", list);
         getServletContext().getRequestDispatcher("/recipes.jsp").forward(request, response);

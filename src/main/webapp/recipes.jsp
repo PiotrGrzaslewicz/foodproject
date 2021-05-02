@@ -30,16 +30,16 @@
             </div>
             <form action="/recipes" method="get" class="flex-row align-baseline">
                 <label class="m-3">Szukaj w:</label>
-                <input type="checkbox" name="columns" value="name" class="checkbox" checked>
+                <input type="checkbox" name="columns" value="name" class="checkbox" ${name}>
                 <label>tytuł</label>
-                <input type="checkbox" name="columns" value="description" class="checkbox" checked>
+                <input type="checkbox" name="columns" value="description" class="checkbox" ${description}>
                 <label>opis</label>
-                <input type="checkbox" name="columns" value="ingredients" class="checkbox" checked>
+                <input type="checkbox" name="columns" value="ingredients" class="checkbox" ${ingredients}>
                 <label>składniki</label>
-                <input type="checkbox" name="columns" value="preparation" class="checkbox" checked>
+                <input type="checkbox" name="columns" value="preparation" class="checkbox" ${preparation}>
                 <label>przygotowanie</label>
                 <div class="flex-row align-center m-2">
-                    <input type="text" name="searchTxt" class="search-height">
+                    <input type="text" name="searchTxt" value="${queryTxt}" class="search-height">
                     <button type="submit" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4 search-height"><i
                             class="fa fa-search"></i></button>
                 </div>
