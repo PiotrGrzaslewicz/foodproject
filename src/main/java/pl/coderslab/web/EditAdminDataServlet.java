@@ -46,7 +46,7 @@ public class EditAdminDataServlet extends HttpServlet {
             String errorMsg = "Użytkownik o podanym mailu już istnieje";
             request.setAttribute("errorMsg", errorMsg);
             request.setAttribute("component", "/app/admin/editadmindata.jsp");
-            getServletContext().getRequestDispatcher("//app/frame.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/app/frame.jsp").forward(request, response);
 
         } else {
 
