@@ -24,6 +24,8 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        req.setCharacterEncoding("UTF-8");
+
         String email = req.getParameter("email");
         String pass = req.getParameter("password");
 
@@ -31,25 +33,25 @@ public class LoginServlet extends HttpServlet {
 
         Admin checkAdmin = adminDao.findByEmail(email);
 
-        if (email.equals("")){
+        if (email.equals("")) {
 
-        String errorMsg = "Proszę podać wszystkie dane";
-        req.setAttribute("errorMsg", errorMsg);
-        getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
+            String errorMsg = "Proszę podać wszystkie dane";
+            req.setAttribute("errorMsg", errorMsg);
+            getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
 
-        }else if (checkAdmin.getPassword() == null) {
+        } else if (checkAdmin.getPassword() == null) {
 
             String errorMsg = "Użytkownik nie istnieje. Spróbuj ponownie";
             req.setAttribute("errorMsg1", errorMsg);
             getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
 
-        }else if (!BCrypt.checkpw(pass, checkAdmin.getPassword())){
+        } else if (!BCrypt.checkpw(pass, checkAdmin.getPassword())) {
 
             String errorMsg = "Niepoprawne hasło. Spróbuj ponownie";
             req.setAttribute("errorMsg2", errorMsg);
             getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
 
-        }else{
+        } else {
 
             HttpSession session = req.getSession();
             session.setAttribute("adminId", checkAdmin.getId());
