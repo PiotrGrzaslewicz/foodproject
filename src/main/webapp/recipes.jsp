@@ -36,6 +36,8 @@
                 <label>opis</label>
                 <input type="checkbox" name="columns" value="ingredients" class="checkbox" checked>
                 <label>składniki</label>
+                <input type="checkbox" name="columns" value="preparation" class="checkbox" checked>
+                <label>przygotowanie</label>
                 <div class="flex-row align-center m-2">
                     <input type="text" name="searchTxt" class="search-height">
                     <button type="submit" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4 search-height"><i
@@ -67,7 +69,7 @@
                 </td>
                 <td class="col-5">${recipe.description}
                 </td>
-                <td class="col-1"><a href="#" class="btn btn-info rounded-0 text-light">Szczegóły</a></td>
+                <td class="col-1"><a href="/details?id=${recipe.id}" class="btn btn-info rounded-0 text-light">Szczegóły</a></td>
             </tr>
         </c:forEach>
         </tbody>

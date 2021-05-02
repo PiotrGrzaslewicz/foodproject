@@ -16,7 +16,7 @@ import java.util.List;
 public class PageRecipesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Recipe> list = new ArrayList<>();
+        List<Recipe> list;
         if(request.getParameterMap().isEmpty()){
             list = (new RecipeDAO()).findAll();
             Comparator<Recipe> comparator = (r1, r2) -> r2.getUpdated().compareTo(r1.getUpdated());
