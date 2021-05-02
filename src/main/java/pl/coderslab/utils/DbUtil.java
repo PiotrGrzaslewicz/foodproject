@@ -25,4 +25,8 @@ public class DbUtil {
         }
         return dataSource;
     }
+
+    public static void setDataSource(DataSource source){
+        dataSource = source;
+    }
 }
