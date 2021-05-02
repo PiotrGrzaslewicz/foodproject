@@ -26,7 +26,7 @@ public class Search<T> {
 
         String[] tokens = phrase.split(" ");
         tokens = Arrays.stream(tokens)
-                .map(t -> t.replaceAll("[^a-zA-Z0-9]", ""))
+                .map(t -> t.replaceAll("[^a-zA-Z0-9żźćńółęąśŻŹĆĄŚĘŁÓŃ]", ""))
                 .filter(t -> t.length() > 2)
                 .distinct()
                 .toArray(String[]::new);
