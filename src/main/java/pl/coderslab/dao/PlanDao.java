@@ -2,12 +2,17 @@ package pl.coderslab.dao;
 import pl.coderslab.model.Admin;
 import pl.coderslab.model.Plan;
 import pl.coderslab.utils.DbUtil;
+import pl.coderslab.utils.EntityFactory;
+
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 public class PlanDao {
+
+    private EntityFactory<Plan> factory = new EntityFactory<>(Plan.class);
+
     public int createPlan(Plan plan){
         String sql = "INSERT INTO plan VALUES (NULL, ?, ?, ?, ?)";
         try(PreparedStatement stmt = DbUtil.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
@@ -43,10 +48,8 @@ public class PlanDao {
         try(PreparedStatement stmt = DbUtil.getConnection().prepareStatement(sql)){
             stmt.setInt(1, id);
             ResultSet set = stmt.executeQuery();
-            if (set.next()){
-                plan = buildFromSet(set);
-            }
-        }catch (SQLException e){
+            plan = factory.getEntity(set);
+        }catch (Exception e){
             e.printStackTrace();
         }
         return plan;
@@ -56,10 +59,8 @@ public class PlanDao {
         String sql = "SELECT * FROM plan";
         try(PreparedStatement stmt = DbUtil.getConnection().prepareStatement(sql)){
             ResultSet set = stmt.executeQuery();
-            while (set.next()){
-                list.add(buildFromSet(set));
-            }
-        }catch (SQLException e){
+            list = factory.getAsList(set);
+        }catch (Exception e){
             e.printStackTrace();
         }
         return list;
@@ -70,10 +71,8 @@ public class PlanDao {
         try(PreparedStatement stmt = DbUtil.getConnection().prepareStatement(sql)){
             stmt.setInt(1, adminId);
             ResultSet set = stmt.executeQuery();
-            while (set.next()){
-                list.add(buildFromSet(set));
-            }
-        }catch (SQLException e){
+            list = factory.getAsList(set);
+        }catch (Exception e){
             e.printStackTrace();
         }
         return list;
@@ -90,26 +89,15 @@ public class PlanDao {
             return 0;
         }
     }
-    private Plan buildFromSet(ResultSet set) throws SQLException{
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        Plan plan = new Plan();
-        plan.setId(set.getInt("id"));
-        plan.setName(set.getString("name"));
-        plan.setDescription(set.getString("description"));
-        plan.setCreated(set.getObject("created", LocalDateTime.class));
-        plan.setAdminId(set.getInt("admin_id"));
-        return plan;
-    }
+
     public Plan getLastPlan(int id){
         Plan plan = null;
         String sql = "select * from plan where admin_id = ? order by created desc limit 1;";
         try(PreparedStatement stmt = DbUtil.getConnection().prepareStatement(sql)){
             stmt.setInt(1, id);
             ResultSet set = stmt.executeQuery();
-            if (set.next()){
-                plan = buildFromSet(set);
-            }
-        }catch (SQLException e){
+            plan = factory.getEntity(set);
+        }catch (Exception e){
             e.printStackTrace();
         }
         return plan;
