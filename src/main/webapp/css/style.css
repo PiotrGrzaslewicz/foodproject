@@ -480,6 +480,43 @@ margin: 0 auto !important;
   display: flex;
   justify-content: space-between;
 }
+
 .q-button{
   width: 45%;
+}
+
+/*------------------------------*/
+/*---- Page recipes ----*/
+/*------------------------------*/
+
+.top-element{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  padding: 10px;
+}
+
+.flex-row{
+  display: flex;
+  flex-direction: row;
+
+}
+
+.align-baseline{
+  align-items: baseline;
+}
+
+.align-center{
+  align-items: center;
+}
+
+.search-height{
+  height: 40px;
+  padding: 5px;
+}
+
+.checkbox{
+  transform: scale(1.5);
+  margin: 10px;
 }
