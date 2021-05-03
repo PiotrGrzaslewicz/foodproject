@@ -29,6 +29,10 @@ public class AuthorizationFilter implements Filter {
             response.setContentType("text/html;charset=utf-8");
             request.setAttribute("adminId", session.getAttribute("adminId"));
             request.setAttribute("adminName", session.getAttribute("adminName"));
+            request.setAttribute("enable", session.getAttribute("enable"));
+            if (session.getAttribute("superAdmin")!=null) {
+                request.setAttribute("superAdmin", session.getAttribute("superAdmin"));
+            }
             chain.doFilter(request, response);
         }
     }

@@ -2,7 +2,7 @@ package pl.coderslab.model;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-public class Admin {
+public class Admin implements Comparable<Admin> {
 
     private int id;
     private String firstName;
@@ -11,6 +11,10 @@ public class Admin {
     private String password;
     private int superAdmin;
     private int enable;
+
+    public int compareTo(Admin admin) {
+        return (int) (this.id - admin.getId());
+    }
 
     public Admin() {
     }
