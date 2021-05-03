@@ -51,12 +51,23 @@ public class LoginServlet extends HttpServlet {
             req.setAttribute("errorMsg2", errorMsg);
             getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
 
-        } else {
+        } else if (checkAdmin.getEnable() == 0) {
+
+            String errorMsg = "Administrator zablokował Twoje konto.";
+            req.setAttribute("errorMsg", errorMsg);
+            getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
+
+        }
+        else {
 
             HttpSession session = req.getSession();
             session.setAttribute("adminId", checkAdmin.getId());
             session.setAttribute("adminName", checkAdmin.getFirstName());
-            session.setAttribute("superAdmin", checkAdmin.getSuperAdmin());
+            session.setAttribute("enable", checkAdmin.getEnable());
+            if (checkAdmin.getSuperAdmin()==1)
+            {
+                session.setAttribute("superAdmin", checkAdmin.getSuperAdmin());
+            }
             resp.sendRedirect("/app/dashboard");
         }
     }

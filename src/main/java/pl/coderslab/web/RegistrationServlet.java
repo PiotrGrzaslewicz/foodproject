@@ -38,6 +38,7 @@ public class RegistrationServlet extends HttpServlet {
         admin.setLastName(lastName);
         admin.setEmail(email);
         admin.setPassword(pass);
+        admin.setEnable(1);
 
         Admin checkAdmin = adminDao.findByEmail(email);
 
