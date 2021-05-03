@@ -39,7 +39,7 @@
                 <input type="checkbox" name="columns" value="preparation" class="checkbox" ${preparation}>
                 <label>przygotowanie</label>
                 <div class="flex-row align-center m-2">
-                    <input type="text" name="searchTxt" value="${queryTxt}" class="search-height">
+                    <input type="text" name="searchTxt" value="<c:out value="${queryTxt}"/>" class="search-height">
                     <button type="submit" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4 search-height"><i
                             class="fa fa-search"></i></button>
                 </div>
@@ -65,9 +65,9 @@
             <tr class="d-flex">
                 <th scope="row" class="col-1">${recipe.id}</th>
                 <td class="col-5">
-                        ${recipe.name}
+                        <c:out value="${recipe.name}"/>
                 </td>
-                <td class="col-5">${recipe.description}
+                <td class="col-5"><c:out value="${recipe.description}"/>
                 </td>
                 <td class="col-1"><a href="/details?id=${recipe.id}" class="btn btn-info rounded-0 text-light">Szczegóły</a></td>
             </tr>

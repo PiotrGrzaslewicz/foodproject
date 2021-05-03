@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: piotr
-  Date: 26.04.2021
-  Time: 23:16
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -41,15 +34,12 @@
                             ${recipe.id}
                     </th>
                     <td class="col-2">
-                            ${recipe.name}
+                           <c:out value="${recipe.name}"/>
                     </td>
                     <td class="col-7">
-                            ${recipe.description}
+                            <c:out value="${recipe.description}"/>
                     </td>
                     <td class="col-2 d-flex align-items-center justify-content-center flex-wrap">
-
-                            <%--                    TODO podmienić linki na działające - USUŃ SZCZEGÓŁY EDYTUJ--%>
-
                         <a href="/app/recipe/delete?id=${recipe.id}" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
                         <a href="/app/recipe/details?id=${recipe.id}" class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>
                         <a href="/app/recipe/edit?id=${recipe.id}" class="btn btn-warning rounded-0 text-light m-1">Edytuj</a>

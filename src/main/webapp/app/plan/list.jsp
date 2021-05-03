@@ -1,12 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: falcon
-  Date: 27.04.2021
-  Time: 09:16
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
     <title>List</title>
@@ -36,9 +30,9 @@
                 <tbody class="text-color-lighter">
                 <c:forEach items="${plans}" var="plan">
                     <tr class="d-flex">
-                        <td class="col-1">${plan.id}</td>
-                        <td class="col-2">${plan.name}</td>
-                        <td class="col-7">${plan.description}</td>
+                        <td class="col-1">${plan.id}/></td>
+                        <td class="col-2"><c:out value="${plan.name}"/></td>
+                        <td class="col-7"><c:out value="${plan.description}"/></td>
                         <td class="col-2 d-flex align-items-center justify-content-center flex-wrap">
                             <a href="/app/plan/delete?id=${plan.id}" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
                             <a href="/app/plan/details?id=${plan.id}" class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>

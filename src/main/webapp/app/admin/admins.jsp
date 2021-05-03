@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: piotr
-  Date: 03.05.2021
-  Time: 01:13
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -41,8 +34,8 @@
                 <c:forEach var="admin" items="${adminMap}">
                     <tr class="d-flex">
                         <td class="col-1">${admin.key.id}</td>
-                        <td class="col-3">${admin.key.firstName}</td>
-                        <td class="col-6">${admin.key.lastName}</td>
+                        <td class="col-3"><c:out value="${admin.key.firstName}"/></td>
+                        <td class="col-6"><c:out value="${admin.key.lastName}"/></td>
                         <c:choose>
                             <c:when test="${admin.value==1}">
                                 <td class="col-2 center">

@@ -1,12 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: juliaszumowska
-  Date: 29/04/2021
-  Time: 12:51
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html>
 <head>
@@ -32,7 +26,7 @@
                         <label id="selectplan">
                             <select name="plan">
                                 <c:forEach items="${plan}" var="plan">
-                                    <option value="${plan.id}">${plan.name}</option>
+                                    <option value="${plan.id}"><c:out value="${plan.name}"/></option>
                                 </c:forEach>
                             </select>
                         </label>
@@ -65,7 +59,7 @@
                         <label id="selectrecipe">
                             <select name="recipe">
                                 <c:forEach items="${recipe}" var="recipe">
-                                    <option value="${recipe.id}">${recipe.name}</option>
+                                    <option value="${recipe.id}"><c:out value="${recipe.name}"/></option>
                                 </c:forEach>
                             </select>
                         </label>
