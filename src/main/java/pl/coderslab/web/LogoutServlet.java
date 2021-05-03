@@ -11,10 +11,8 @@ public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        session.setAttribute("adminName", null);
-        session.setAttribute("adminId", null);
+        session.invalidate();
         response.sendRedirect("/login");
-
     }
 
     @Override
