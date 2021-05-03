@@ -1,6 +1,4 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 
 <section class="last-info-section padding-small" id="contact">
     <div class="container">

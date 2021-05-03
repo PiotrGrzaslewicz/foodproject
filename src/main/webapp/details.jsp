@@ -45,17 +45,17 @@
           <tr class="d-flex">
             <th scope="row" class="col-2">Nazwa Przepisu</th>
             <td class="col-7">
-              ${recipe.name}
+             <c:out value="${recipe.name}"/>
             </td>
           </tr>
           <tr class="d-flex">
             <th scope="row" class="col-2">Opis przepisu</th>
-            <td class="col-7">${recipe.description}</td>
+            <td class="col-7"><c:out value="${recipe.description}"/></td>
           </tr>
           <tr class="d-flex">
             <th scope="row" class="col-2">Przygotowanie (minuty)</th>
             <td class="col-7">
-              ${recipe.preparationTime}
+              <c:out value="${recipe.preparationTime}"/>
             </td>
           </tr>
           </tbody>
@@ -68,12 +68,12 @@
         </div>
         <div class="row d-flex">
           <div class="col-5 p-4">
-            <p>${recipe.preparation}</p>
+            <p><c:out value="${recipe.preparation}"/></p>
           </div>
           <div class="col-2"></div>
           <ul class="col-5 p-4 list-unstyled">
             <c:forEach items="${ingredients}" var="ingredient">
-              <li>${ingredient}</li>
+              <li><c:out value="${ingredient}"/> </li>
             </c:forEach>
           </ul>
         </div>

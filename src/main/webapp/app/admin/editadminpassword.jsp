@@ -1,12 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: piotr
-  Date: 29.04.2021
-  Time: 10:26
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
     <title>Title</title>
@@ -32,13 +26,13 @@
                     <tr class="d-flex">
                         <th scope="row" class="col-2"><h4>Nowe hasło</h4></th>
                         <td class="col-7">
-                            <input class="w-100 p-1" value="" name="password">
+                            <input type="password" class="w-100 p-1" value="" name="password">
                         </td>
                     </tr>
                     <tr class="d-flex">
                         <th scope="row" class="col-2"><h4>Powtórz hasło</h4></th>
                         <td class="col-7">
-                            <input class="w-100 p-1" value="" name="repassword">
+                            <input type="password" class="w-100 p-1" value="" name="repassword">
                         </td>
                     </tr>
                     </tbody>

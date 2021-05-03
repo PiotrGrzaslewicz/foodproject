@@ -1,12 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: juliaszumowska
-  Date: 28/04/2021
-  Time: 14:43
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
     <title>Title</title>
@@ -48,13 +42,13 @@
     </div>
     <div class="m-4 p-4 border-dashed view-height">
         <h2 class="dashboard-content-title">
-            <span>Ostatnio dodany plan:</span> ${plan.name} ${errorMsg}
+            <span>Ostatnio dodany plan:</span> <c:out value="${plan.name}"/> ${errorMsg}
         </h2>
         <c:forEach items="${details}" var="entry">
             <table class="table">
                 <thead>
                 <tr class="d-flex">
-                    <th class="col-2">${entry.key.name}</th>
+                    <th class="col-2"><c:out value="${entry.key.name}"/></th>
                     <th class="col-7"></th>
                     <th class="col-1"></th>
                     <th class="col-2"></th>
@@ -63,8 +57,8 @@
                 <tbody class="text-color-lighter">
                 <c:forEach items="${entry.value}" var="meal">
                     <tr class="d-flex">
-                        <td class="col-2">${meal.mealName}</td>
-                        <td class="col-7">${meal.recipeName}</td>
+                        <td class="col-2"><c:out value="${meal.mealName}"/></td>
+                        <td class="col-7"><c:out value="${meal.recipeName}"/></td>
 
                         <td class="col-2 center">
                             <a href="/app/recipe/details?id=${meal.recipeId}"

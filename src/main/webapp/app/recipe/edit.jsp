@@ -1,12 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: piotr
-  Date: 27.04.2021
-  Time: 23:19
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html>
 <head>
@@ -28,17 +22,17 @@
                     <tr class="d-flex">
                         <th scope="row" class="col-2">Nazwa Przepisu</th>
                         <td class="col-7">
-                            <input name="name" class="w-100 p-1" value="${recipe.name}">
+                            <input name="name" class="w-100 p-1" value="${fn:escapeXml(recipe.name)}">
                         </td>
                     </tr>
                     <tr class="d-flex">
                         <th scope="row" class="col-2">Opis przepisu</th>
-                        <td class="col-7"> <textarea class="w-100 p-1" rows="5" name="description">${recipe.description}</textarea></td>
+                        <td class="col-7"> <textarea class="w-100 p-1" rows="5" name="description"><c:out value="${recipe.description}"/></textarea></td>
                     </tr>
                     <tr class="d-flex">
                         <th scope="row" class="col-2">Przygotowanie (minuty)</th>
                         <td class="col-3">
-                            <input name = "preparationTime" class="p-1" type="number" value="${recipe.preparationTime}" min="1">
+                            <input name = "preparationTime" class="p-1" type="number" value="${fn:escapeXml(recipe.preparationTime)}" min="1">
                         </td>
                     </tr>
                     </tbody>
@@ -51,12 +45,12 @@
                 </div>
                 <div class="row d-flex">
                     <div class="col-5 p-4">
-                        <textarea class="w-100 p-1" rows="10" name="preparation">${recipe.preparation}</textarea>
+                        <textarea class="w-100 p-1" rows="10" name="preparation"><c:out value="${recipe.preparation}"/></textarea>
                     </div>
                     <div class="col-2"></div>
 
                     <div class="col-5 p-4">
-                        <textarea class="w-100 p-1" rows="10" name="ingredients">${recipe.ingredients}</textarea>
+                        <textarea class="w-100 p-1" rows="10" name="ingredients"><c:out value="${recipe.ingredients}"/></textarea>
                     </div>
                 </div>
                 <input type="hidden" name="id" value="${recipe.id}">

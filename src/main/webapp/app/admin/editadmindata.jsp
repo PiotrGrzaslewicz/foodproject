@@ -1,11 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: piotr
-  Date: 28.04.2021
-  Time: 22:39
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html>
 <head>
@@ -33,19 +28,19 @@
                     <tr class="d-flex">
                         <th scope="row" class="col-2"><h4>Imię</h4></th>
                         <td class="col-7">
-                            <input class="w-100 p-1" name="firstName" value="${admin.firstName}">
+                            <input class="w-100 p-1" name="firstName" value="${fn:escapeXml(admin.firstName)}">
                         </td>
                     </tr>
                     <tr class="d-flex">
                         <th scope="row" class="col-2"><h4>Nazwisko</h4></th>
                         <td class="col-7">
-                            <input class="w-100 p-1" name="lastName" value="${admin.lastName}">
+                            <input class="w-100 p-1" name="lastName" value="${fn:escapeXml(admin.lastName)}">
                         </td>
                     </tr>
                     <tr class="d-flex">
                         <th scope="row" class="col-2"><h4>Email</h4></th>
                         <td class="col-3">
-                            <input class="p-1 w-100" type="text" name="email" value="${admin.email}">
+                            <input class="p-1 w-100" type="text" name="email" value="${fn:escapeXml(admin.email)}">
                         </td>
                     </tr>
                     </tbody>

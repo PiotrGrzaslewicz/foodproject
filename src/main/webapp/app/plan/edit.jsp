@@ -1,11 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: falcon
-  Date: 26.04.2021
-  Time: 16:36
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <html>
 <head>
     <title>Add plan</title>
@@ -32,7 +28,7 @@
                         Nazwa planu
                     </label>
                     <div class="col-sm-10">
-                        <input name="name" class="form-control" id="planName" value="${plan.name}">
+                        <input name="name" class="form-control" id="planName" value="${fn:escapeXml(plan.name)}">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -41,7 +37,7 @@
                     </label>
                     <div class="col-sm-10">
                         <textarea name="description" class="form-control" rows="5"
-                                  id="planDescription">${plan.description}</textarea>
+                                  id="planDescription"><c:out value="${plan.description}"/></textarea>
                     </div>
                 </div>
 

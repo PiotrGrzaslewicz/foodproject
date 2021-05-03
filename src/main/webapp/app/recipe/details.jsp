@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: piotr
-  Date: 27.04.2021
-  Time: 16:22
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -26,17 +19,17 @@
                 <tr class="d-flex">
                     <th scope="row" class="col-2">Nazwa Przepisu</th>
                     <td class="col-7">
-                        ${recipe.name}
+                        <c:out value="${recipe.name}"/>
                     </td>
                 </tr>
                 <tr class="d-flex">
                     <th scope="row" class="col-2">Opis przepisu</th>
-                    <td class="col-7">${recipe.description}</td>
+                    <td class="col-7"><c:out value="${recipe.description}"/></td>
                 </tr>
                 <tr class="d-flex">
                     <th scope="row" class="col-2">Przygotowanie (minuty)</th>
                     <td class="col-7">
-                        ${recipe.preparationTime}
+                        <c:out value="${recipe.preparationTime}"/>
                     </td>
                 </tr>
                 </tbody>
@@ -49,24 +42,12 @@
             </div>
             <div class="row d-flex">
                 <div class="col-5 p-4">
-                    <p>${recipe.preparation}</p>
+                    <p><c:out value="${recipe.preparation}"/></p>
                 </div>
                 <div class="col-2"></div>
 
                 <ul class="col-5 p-4 list-unstyled">
-                    <li>${recipe.ingredients}</li>
-
-<%--                   TODO LISTOWANIE SklADNIKOW Z TABELI - > zrobic przeksztalcenie skladnikow na tabele --%>
-
-<%--                    <li>brukselka 300g</li>--%>
-<%--                    <li>ziemniaki 500g</li>--%>
-<%--                    <li>Fix Naturalnie makaronowa z szynką Knorr 1 szt.</li>--%>
-<%--                    <li>średnia cebula 1szt.</li>--%>
-<%--                    <li>ząbek czosnku 1szt.</li>--%>
-<%--                    <li>kiełbasa np. śląska 500g</li>--%>
-<%--                    <li>śmietana 18% 200 ml</li>--%>
-<%--                    <li>Rama Smaż jak szef kuchni, wariant klasyczny 4 łyżki</li>--%>
-<%--                    <li>gałązka tymianku 1 szt.</li>--%>
+                    <li><c:out value="${recipe.ingredients}"/></li>
                 </ul>
             </div>
 
