@@ -28,17 +28,9 @@ public class EditAdminDataServlet extends HttpServlet {
         AdminDao adminDao = new AdminDao();
         HttpSession session = request.getSession();
         String email = request.getParameter("email");
-        List<Admin> admins = adminDao.findAll();
-        boolean res = false;
+        Admin checkAdmin = adminDao.findByEmail(email);
 
-        for (Admin admin : admins) {
-            if (admin.getEmail().equals(email)) {
-                res = true;
-                break;
-            }
-        }
-
-        if (res) {
+        if ((checkAdmin.getId()>0) && (checkAdmin.getId() != (Integer) session.getAttribute("adminId"))) {
 
             int id = ((Integer) session.getAttribute("adminId"));
             Admin admin = adminDao.findById(id);
