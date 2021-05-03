@@ -22,7 +22,7 @@
 <%@ include file="jspf/header.jsp" %>
 
 <section>
-    <div class="row padding-small">
+    <div class="row padding-small page-width">
         <div class="top-element">
             <div class="flex-row">
                 <i class="fas fa-users icon-users"></i>
@@ -74,6 +74,18 @@
         </c:forEach>
         </tbody>
     </table>
+    <div class="page-cont m-5">
+        <c:forEach begin="1" end="${pagesCount}" step="1" var="page">
+            <c:choose>
+                <c:when test="${page eq actualPage}">
+                    <span class="btn actual-page rounded-0 pt-0 pb-0 m-1">${page}</span>
+                </c:when>
+                <c:otherwise>
+                    <a href="/recipes?page=${page}" class="btn btn-color rounded-0 pt-0 pb-0 m-1">${page}</a>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+    </div>
 </section>
 
 <%@ include file="jspf/footer.jsp" %>
