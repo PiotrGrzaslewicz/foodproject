@@ -4,11 +4,10 @@ import com.google.common.base.CaseFormat;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Search<T> {
 
@@ -24,7 +23,7 @@ public class Search<T> {
 
     public List<T> inColumns(String phrase, String[] colNames, boolean sortByHitCount) {
 
-        String[] tokens = phrase.split(" ");
+        String[] tokens = phrase.split(" ", 10);
         tokens = Arrays.stream(tokens)
                 .map(t -> t.replaceAll("[^a-zA-Z0-9żźćńółęąśŻŹĆĄŚĘŁÓŃ]", ""))
                 .filter(t -> t.length() > 2)
@@ -43,7 +42,7 @@ public class Search<T> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(sortByHitCount) sortByHitCount(list, colNames, tokens);
+        if (sortByHitCount) sortByHitCount(list, colNames, tokens);
         return list;
     }
 
@@ -51,8 +50,12 @@ public class Search<T> {
         return inColumns(phrase, colNames, true);
     }
 
-    private List<T> sortByHitCount(List<T> list, String[] colNames, String[] tokens){
-        list.sort((a, b) -> getHitsInRow(b, colNames, tokens) - getHitsInRow(a, colNames, tokens));
+    private List<T> sortByHitCount(List<T> list, String[] colNames, String[] tokens) {
+        Map<T, Integer> map = new HashMap<>();
+        for (T n : list){
+            map.put(n, getHitsInRow(n, colNames, tokens));
+        }
+        list.sort((a, b) -> map.get(b) - map.get(a));
         return list;
     }
 
@@ -60,7 +63,7 @@ public class Search<T> {
         return "get" + CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, colName);
     }
 
-    private int getHitsInRow(T obj, String[] colNames, String[] tokens){
+    private int getHitsInRow(T obj, String[] colNames, String[] tokens) {
         int n = 0;
         try {
             for (String colName : colNames) {
@@ -73,7 +76,7 @@ public class Search<T> {
                     }
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return n;
