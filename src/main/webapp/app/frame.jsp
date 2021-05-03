@@ -68,6 +68,13 @@
                     <i class="fas fa-angle-right"></i>
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/app/logout">
+                    <span>Wyloguj</span>
+                    <i class="fas fa-angle-right"></i>
+                </a>
+            </li>
         </ul>
 
         <jsp:include page="${component}" flush="true" />
