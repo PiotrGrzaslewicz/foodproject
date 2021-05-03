@@ -45,10 +45,13 @@ public class PageRecipesServlet extends HttpServlet {
         }
         else {
             Search<Recipe> search = new Search<>(Recipe.class, "recipe");
-            list = search.inColumns(request.getParameter("searchTxt"), request.getParameterMap().get("columns"));
-            for (String key : request.getParameterMap().get("columns")){
-                request.setAttribute(key, "checked");
+            if(request.getParameter("columns") != null) {
+                list = search.inColumns(request.getParameter("searchTxt"), request.getParameterMap().get("columns"));
+                for (String key : request.getParameterMap().get("columns")) {
+                    request.setAttribute(key, "checked");
+                }
             }
+            else list = new ArrayList<>();
             request.setAttribute("queryTxt", request.getParameter("searchTxt"));
         }
         request.setAttribute("results", list);
