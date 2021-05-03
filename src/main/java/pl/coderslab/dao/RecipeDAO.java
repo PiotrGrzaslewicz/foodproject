@@ -186,4 +186,31 @@ public class RecipeDAO {
         }
         return number;
     }
+
+    public int numberOfRecipes(){
+        String sql = "SELECT COUNT(id) AS 'count' FROM recipe";
+        try(PreparedStatement stmt = DbUtil.getConnection().prepareStatement(sql)){
+            ResultSet set = stmt.executeQuery();
+            if(set.next()) return set.getInt("count");
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public List<Recipe> getWithLimit(int limit, int offset){
+        String sql = "SELECT * FROM recipe ORDER BY updated desc LIMIT ? OFFSET ?";
+        List<Recipe> list = new ArrayList<>();
+        try(PreparedStatement stmt = DbUtil.getConnection().prepareStatement(sql)){
+            stmt.setInt(1, limit);
+            stmt.setInt(2, offset);
+            ResultSet set = stmt.executeQuery();
+            while (set.next()){
+                list.add(buildFromSet(set));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

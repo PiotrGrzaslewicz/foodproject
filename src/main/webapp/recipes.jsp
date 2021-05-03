@@ -22,7 +22,7 @@
 <%@ include file="jspf/header.jsp" %>
 
 <section>
-    <div class="row padding-small">
+    <div class="row padding-small page-width">
         <div class="top-element">
             <div class="flex-row">
                 <i class="fas fa-users icon-users"></i>
@@ -30,16 +30,16 @@
             </div>
             <form action="/recipes" method="get" class="flex-row align-baseline">
                 <label class="m-3">Szukaj w:</label>
-                <input type="checkbox" name="columns" value="name" class="checkbox" checked>
+                <input type="checkbox" name="columns" value="name" class="checkbox" ${name}>
                 <label>tytuł</label>
-                <input type="checkbox" name="columns" value="description" class="checkbox" checked>
+                <input type="checkbox" name="columns" value="description" class="checkbox" ${description}>
                 <label>opis</label>
-                <input type="checkbox" name="columns" value="ingredients" class="checkbox" checked>
+                <input type="checkbox" name="columns" value="ingredients" class="checkbox" ${ingredients}>
                 <label>składniki</label>
-                <input type="checkbox" name="columns" value="preparation" class="checkbox" checked>
+                <input type="checkbox" name="columns" value="preparation" class="checkbox" ${preparation}>
                 <label>przygotowanie</label>
                 <div class="flex-row align-center m-2">
-                    <input type="text" name="searchTxt" class="search-height">
+                    <input type="text" name="searchTxt" value="${queryTxt}" class="search-height">
                     <button type="submit" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4 search-height"><i
                             class="fa fa-search"></i></button>
                 </div>
@@ -74,6 +74,18 @@
         </c:forEach>
         </tbody>
     </table>
+    <div class="page-cont m-5">
+        <c:forEach begin="1" end="${pagesCount}" step="1" var="page">
+            <c:choose>
+                <c:when test="${page eq actualPage}">
+                    <span class="btn actual-page rounded-0 pt-0 pb-0 m-1">${page}</span>
+                </c:when>
+                <c:otherwise>
+                    <a href="/recipes?page=${page}" class="btn btn-color rounded-0 pt-0 pb-0 m-1">${page}</a>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+    </div>
 </section>
 
 <%@ include file="jspf/footer.jsp" %>
