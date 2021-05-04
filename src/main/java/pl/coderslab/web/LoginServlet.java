@@ -64,9 +64,9 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("adminId", checkAdmin.getId());
             session.setAttribute("adminName", checkAdmin.getFirstName());
             session.setAttribute("enable", checkAdmin.getEnable());
-            if (checkAdmin.getSuperAdmin()==1)
+            if (checkAdmin.getSuperadmin()==1)
             {
-                session.setAttribute("superAdmin", checkAdmin.getSuperAdmin());
+                session.setAttribute("superAdmin", checkAdmin.getSuperadmin());
             }
             resp.sendRedirect("/app/dashboard");
         }

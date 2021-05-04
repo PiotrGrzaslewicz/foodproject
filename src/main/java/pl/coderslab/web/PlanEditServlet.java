@@ -23,7 +23,7 @@ public class PlanEditServlet extends HttpServlet {
         Plan plan = (new PlanDao()).getById(Integer.parseInt(request.getParameter("id")));
         plan.setName(request.getParameter("name"));
         plan.setDescription(request.getParameter("description"));
-        if((new PlanDao()).createPlan(plan) > 0) response.sendRedirect("/app/plan/list");
+        if((new PlanDao()).updatePlan(plan) > 0) response.sendRedirect("/app/plan/list");
         else response.getWriter().append("Something went wrong...");
     }
 }

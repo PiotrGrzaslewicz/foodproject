@@ -30,7 +30,7 @@
                 <tbody class="text-color-lighter">
                 <c:forEach items="${plans}" var="plan">
                     <tr class="d-flex">
-                        <td class="col-1">${plan.id}/></td>
+                        <td class="col-1"><c:out value="${plan.id}"/></td>
                         <td class="col-2"><c:out value="${plan.name}"/></td>
                         <td class="col-7"><c:out value="${plan.description}"/></td>
                         <td class="col-2 d-flex align-items-center justify-content-center flex-wrap">

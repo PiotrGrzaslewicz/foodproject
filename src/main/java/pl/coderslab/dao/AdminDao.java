@@ -1,6 +1,5 @@
 package pl.coderslab.dao;
 
-import pl.coderslab.exception.NotFoundException;
 import pl.coderslab.model.Admin;
 import pl.coderslab.utils.DbUtil;
 
@@ -27,7 +26,7 @@ public class AdminDao {
             stm.setString(2, admin.getLastName());
             stm.setString(3, admin.getEmail());
             stm.setString(4, admin.hashAndSetPassword());
-            stm.setString(5, String.valueOf(admin.getSuperAdmin()));
+            stm.setString(5, String.valueOf(admin.getSuperadmin()));
             stm.setString(6, String.valueOf(admin.getEnable()));
             stm.executeUpdate();
             ResultSet resultSet = stm.getGeneratedKeys();
@@ -65,7 +64,7 @@ public class AdminDao {
                 adminToAdd.setFirstName(resultSet.getString("first_name"));
                 adminToAdd.setLastName(resultSet.getString("last_name"));
                 adminToAdd.setEmail(resultSet.getString("email"));
-                adminToAdd.setSuperAdmin(resultSet.getInt("superadmin"));
+                adminToAdd.setSuperadmin(resultSet.getInt("superadmin"));
                 adminToAdd.setEnable(resultSet.getInt("enable"));
                 adminList.add(adminToAdd);
             }
@@ -88,7 +87,7 @@ public class AdminDao {
                     admin.setLastName(resultSet.getString("last_name"));
                     admin.setEmail(resultSet.getString("email"));
                     admin.setPassword(resultSet.getString("password"));
-                    admin.setSuperAdmin(resultSet.getInt("superadmin"));
+                    admin.setSuperadmin(resultSet.getInt("superadmin"));
                     admin.setEnable(resultSet.getInt("enable"));
                 }
             }
@@ -111,7 +110,7 @@ public class AdminDao {
                     admin.setLastName(resultSet.getString("last_name"));
                     admin.setEmail(resultSet.getString("email"));
                     admin.setPassword(resultSet.getString("password"));
-                    admin.setSuperAdmin(resultSet.getInt("superadmin"));
+                    admin.setSuperadmin(resultSet.getInt("superadmin"));
                     admin.setEnable(resultSet.getInt("enable"));
                 }
             }
@@ -129,7 +128,7 @@ public class AdminDao {
             stm.setString(2, admin.getLastName());
             stm.setString(3, admin.getEmail());
             stm.setString(4, admin.getPassword());
-            stm.setInt(5, admin.getSuperAdmin());
+            stm.setInt(5, admin.getSuperadmin());
             stm.setInt(6, admin.getEnable());
             return stm.executeUpdate();
         } catch (SQLException e) {
