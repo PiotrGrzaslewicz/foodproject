@@ -3,6 +3,7 @@ package pl.coderslab.model;
 import pl.coderslab.dao.DayNameDao;
 import pl.coderslab.utils.DbUtil;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -71,6 +72,22 @@ public class Meal implements Comparable<Meal>{
             e.printStackTrace();
         }
         return map;
+    }
+
+    public static void remove(int id){
+
+        String sql = "DELETE FROM recipe_plan WHERE id = ?";
+        try (Connection conn = DbUtil.getConnection()) {
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setInt(1, id);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
