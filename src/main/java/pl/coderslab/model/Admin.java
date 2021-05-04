@@ -9,7 +9,7 @@ public class Admin implements Comparable<Admin> {
     private String lastName;
     private String email;
     private String password;
-    private int superAdmin;
+    private int superadmin;
     private int enable;
 
     public int compareTo(Admin admin) {
@@ -27,12 +27,12 @@ public class Admin implements Comparable<Admin> {
         this.id = id;
     }
 
-    public Admin(String firstName, String lastName, String email, String password, int superAdmin) {
+    public Admin(String firstName, String lastName, String email, String password, int superadmin) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.superAdmin = superAdmin;
+        this.superadmin = superadmin;
     }
 
     public String getFirstName() {
@@ -72,17 +72,17 @@ public class Admin implements Comparable<Admin> {
         return password;
     }
 
-    public int getSuperAdmin() {
-        return superAdmin;
+    public int getSuperadmin() {
+        return superadmin;
     }
 
-    public void setSuperAdmin(int superAdmin) {
-        this.superAdmin = superAdmin;
+    public void setSuperadmin(int superadmin) {
+        this.superadmin = superadmin;
     }
 
     @Override
     public String toString(){
-        return id + " " + firstName + " " + lastName + " " + email + " " + password + " " + superAdmin + "" + enable;
+        return id + " " + firstName + " " + lastName + " " + email + " " + password + " " + superadmin + "" + enable;
     }
     public String hashPassword(String password) {
 

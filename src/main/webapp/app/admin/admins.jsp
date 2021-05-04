@@ -14,9 +14,20 @@
             <div class="col noPadding">
                 <h3 class="color-header text-uppercase">LISTA UŻYTKOWNIKÓW</h3>
             </div>
-            <div class="col d-flex justify-content-end mb-2 noPadding">
-                <a href="/app/dashboard" class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">Powrót</a>
-            </div>
+            <form action="/app/super-admin-users" method="get" class="flex-row align-baseline">
+                <label class="m-3">Szukaj w:</label>
+                <input type="checkbox" name="columns" value="first_name" class="checkbox" ${first_name}>
+                <label>imię</label>
+                <input type="checkbox" name="columns" value="last_name" class="checkbox" ${last_name}>
+                <label>nazwisko</label>
+                <input type="checkbox" name="columns" value="email" class="checkbox" ${email}>
+                <label>e-mail</label>
+                <div class="flex-row align-center m-2">
+                    <input type="text" name="searchTxt" value="<c:out value="${queryTxt}"/>" class="search-height">
+                    <button type="submit" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4 search-height"><i
+                            class="fa fa-search"></i></button>
+                </div>
+            </form>
         </div>
 
         <div class="schedules-content">

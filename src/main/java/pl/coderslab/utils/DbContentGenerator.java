@@ -58,7 +58,7 @@ public class DbContentGenerator {
                 admin.setFirstName(name[0]);
                 admin.setLastName(name[1]);
                 admin.setPassword("1234");
-                admin.setSuperAdmin(0);
+                admin.setSuperadmin(0);
                 admin.setEnable(1);
                 admin.setId(dao.createAdmin(admin));
             }
