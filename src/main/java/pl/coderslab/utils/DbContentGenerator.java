@@ -2,8 +2,12 @@ package pl.coderslab.utils;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import pl.coderslab.dao.AdminDao;
+import pl.coderslab.dao.DayNameDao;
+import pl.coderslab.dao.PlanDao;
 import pl.coderslab.dao.RecipeDAO;
 import pl.coderslab.model.Admin;
+import pl.coderslab.model.DayName;
+import pl.coderslab.model.Plan;
 import pl.coderslab.model.Recipe;
 
 import javax.sql.DataSource;
@@ -12,11 +16,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class DbContentGenerator {
@@ -30,12 +32,34 @@ public class DbContentGenerator {
         admins = generateAdmins(userLimit);
         Random random = new Random();
         RecipeDAO dao = new RecipeDAO();
+        List<DayName> days = (new DayNameDao()).findAll();
         for (Admin admin : admins) {
             System.out.println("Populating " + admin.getFirstName() + " " + admin.getLastName());
+            HashMap<String, Recipe> map = new HashMap<>();
             for (int i = 0; i < (random.nextInt(15) + 5); i++) {
                 Recipe recipe = recipes.get(random.nextInt(recipes.size()));
                 recipe.setAdminId(admin.getId());
-                dao.create(recipe);
+                if(!map.containsKey(recipe.getName())) map.put(recipe.getName(), recipe);
+            }
+            for (Map.Entry<String, Recipe> entry : map.entrySet()){
+                dao.create(entry.getValue());
+            }
+            String[] meals = {"Śniadanie", "Obiad", "Kolacja"};
+            Plan plan = new Plan();
+            plan.setName("Test");
+            plan.setDescription("Test desc");
+            plan.setAdminId(admin.getId());
+            plan.setId((new PlanDao()).createPlan(plan));
+            List<Recipe> recList = dao.findAllByAdmin(admin.getId());
+            for (DayName day : days){
+                for (int i = 0; i < meals.length; i++) {
+                    addRecipeToPlan(
+                            recList.get(random.nextInt(recList.size())).getId(),
+                            meals[i],
+                            i,
+                            day.getId(),
+                            plan.getId());
+                }
             }
         }
         System.out.println("Finished populating");
@@ -127,6 +151,29 @@ public class DbContentGenerator {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public void addRecipeToPlan(int recipe_id, String meal_name, int display_order, int day_name_id, int plan_id) {
+
+        String sql = "INSERT INTO recipe_plan(recipe_id, meal_name, display_order, day_name_id, plan_id) VALUES (?,?,?, ?, ?);";
+        try (PreparedStatement insertStm = DbUtil.getConnection().prepareStatement(sql)) {
+
+            insertStm.setInt(1, recipe_id);
+            insertStm.setString(2, meal_name);
+            insertStm.setInt(3, display_order);
+            insertStm.setInt(4, day_name_id);
+            insertStm.setInt(5, plan_id);
+
+            int result = insertStm.executeUpdate();
+
+            if (result != 1) {
+                throw new RuntimeException("Execute update returned " + result);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     private DataSource getDataSource() {
