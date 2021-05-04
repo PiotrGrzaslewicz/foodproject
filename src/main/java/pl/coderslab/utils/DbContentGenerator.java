@@ -9,16 +9,13 @@ import pl.coderslab.model.Admin;
 import pl.coderslab.model.DayName;
 import pl.coderslab.model.Plan;
 import pl.coderslab.model.Recipe;
-import pl.coderslab.web.AddRecipeToPlan;
 
-import javax.servlet.http.HttpServlet;
 import javax.sql.DataSource;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.*;
