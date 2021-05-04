@@ -47,7 +47,9 @@ public class Meal implements Comparable<Meal>{
                 "FROM recipe_plan rp JOIN recipe r ON (r.id = rp.recipe_id) \n" +
                 "WHERE rp.plan_id = ?";
         TreeMap<DayName, List<Meal>> map = new TreeMap<>();
-        try(PreparedStatement stmt = DbUtil.getConnection().prepareStatement(sql)){
+
+        try(Connection conn = DbUtil.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
             stmt.setInt(1, planId);
             ResultSet set = stmt.executeQuery();
             while (set.next()){
@@ -77,8 +79,8 @@ public class Meal implements Comparable<Meal>{
     public static void remove(int id){
 
         String sql = "DELETE FROM recipe_plan WHERE id = ?";
-        try (Connection conn = DbUtil.getConnection()) {
-            PreparedStatement stm = conn.prepareStatement(sql);
+        try (Connection conn = DbUtil.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql)) {
             stm.setInt(1, id);
             stm.executeUpdate();
         } catch (SQLException e) {

@@ -20,8 +20,8 @@ public class AdminDao {
 
     public int createAdmin(Admin admin) {
 
-        try (Connection conn = DbUtil.getConnection()) {
-            PreparedStatement stm = conn.prepareStatement(CREATE_USER_QUERY, Statement.RETURN_GENERATED_KEYS);
+        try (Connection conn = DbUtil.getConnection();
+            PreparedStatement stm = conn.prepareStatement(CREATE_USER_QUERY, Statement.RETURN_GENERATED_KEYS)) {
             stm.setString(1, admin.getFirstName());
             stm.setString(2, admin.getLastName());
             stm.setString(3, admin.getEmail());
@@ -54,8 +54,8 @@ public class AdminDao {
 
     public List<Admin> findAll() {
         List<Admin> adminList = new ArrayList<>();
-        try (Connection conn = DbUtil.getConnection()) {
-            PreparedStatement stm = conn.prepareStatement(FIND_ALL_USERS_QUERY);
+        try (Connection conn = DbUtil.getConnection();
+            PreparedStatement stm = conn.prepareStatement(FIND_ALL_USERS_QUERY)) {
             ResultSet resultSet = stm.executeQuery();
 
             while (resultSet.next()) {
@@ -77,8 +77,8 @@ public class AdminDao {
     public Admin findByEmail(String email) {
 
         Admin admin = new Admin();
-        try (Connection conn = DbUtil.getConnection()) {
-            PreparedStatement stm = conn.prepareStatement(FIND_BY_EMAIL_QUERY);
+        try (Connection conn = DbUtil.getConnection();
+            PreparedStatement stm = conn.prepareStatement(FIND_BY_EMAIL_QUERY)) {
             stm.setString(1, email);
             try (ResultSet resultSet = stm.executeQuery()) {
                 while (resultSet.next()) {
@@ -100,8 +100,8 @@ public class AdminDao {
     public Admin findById(int adminId) {
 
         Admin admin = new Admin();
-        try (Connection conn = DbUtil.getConnection()) {
-            PreparedStatement stm = conn.prepareStatement(READ_USERS_QUERY);
+        try (Connection conn = DbUtil.getConnection();
+            PreparedStatement stm = conn.prepareStatement(READ_USERS_QUERY)) {
             stm.setInt(1, adminId);
             try (ResultSet resultSet = stm.executeQuery()) {
                 while (resultSet.next()) {
@@ -121,8 +121,8 @@ public class AdminDao {
     }
 
     public int updateAdmin(Admin admin) {
-        try (Connection conn = DbUtil.getConnection()) {
-            PreparedStatement stm = conn.prepareStatement(UPDATE_USER_QUERY);
+        try (Connection conn = DbUtil.getConnection();
+            PreparedStatement stm = conn.prepareStatement(UPDATE_USER_QUERY)) {;
             stm.setInt(7, admin.getId());
             stm.setString(1, admin.getFirstName());
             stm.setString(2, admin.getLastName());

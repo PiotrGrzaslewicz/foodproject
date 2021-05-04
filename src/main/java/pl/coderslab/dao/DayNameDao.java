@@ -18,8 +18,8 @@ public class DayNameDao {
 
     public List<DayName> findAll() {
         List<DayName> dayNames = new ArrayList<>();
-        try (Connection connection = DbUtil.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(FIND_ALL_BOOKS_QUERY);
+        try (Connection connection = DbUtil.getConnection();
+            PreparedStatement statement = connection.prepareStatement(FIND_ALL_BOOKS_QUERY)) {
             ResultSet resultSet = statement.executeQuery();
             dayNames = factory.getAsList(resultSet);
         } catch (Exception e) {
