@@ -69,7 +69,7 @@
                 </td>
                 <td class="col-5"><c:out value="${recipe.description}"/>
                 </td>
-                <td class="col-1"><a href="/details?id=${recipe.id}" class="btn btn-info rounded-0 text-light">Szczegóły</a></td>
+                <td class="col-1"><a href="/details?id=${recipe.id}${origin}" class="btn btn-info rounded-0 text-light">Szczegóły</a></td>
             </tr>
         </c:forEach>
         </tbody>

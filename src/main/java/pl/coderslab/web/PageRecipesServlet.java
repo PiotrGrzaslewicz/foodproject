@@ -4,12 +4,13 @@ import pl.coderslab.dao.RecipeDAO;
 import pl.coderslab.model.Recipe;
 import pl.coderslab.utils.Search;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 @WebServlet(name = "PageRecipesServlet", value = "/recipes")
@@ -36,6 +37,7 @@ public class PageRecipesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         List<Recipe> list;
         if(request.getParameterMap().isEmpty()){
             list = prepareList(request, 1);
@@ -54,6 +56,7 @@ public class PageRecipesServlet extends HttpServlet {
             else list = new ArrayList<>();
             request.setAttribute("queryTxt", request.getParameter("searchTxt"));
         }
+        if(request.getQueryString() != null) request.setAttribute("origin", "&" + request.getQueryString());
         request.setAttribute("results", list);
         getServletContext().getRequestDispatcher("/recipes.jsp").forward(request, response);
     }

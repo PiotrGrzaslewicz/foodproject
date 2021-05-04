@@ -7,6 +7,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.Arrays;
 
 @WebServlet(name = "PageRecipeDetailsServlet", value = "/details")
 public class PageRecipeDetailsServlet extends HttpServlet {
@@ -16,6 +17,8 @@ public class PageRecipeDetailsServlet extends HttpServlet {
         request.setAttribute("recipe", recipe);
         String[] list = ((Recipe) request.getAttribute("recipe")).getIngredients().split("\n");
         request.setAttribute("ingredients", list);
+        String origin = request.getQueryString().replaceFirst("id=[0-9]*", "");
+        if(origin.length() > 0) request.setAttribute("origin", origin.replaceFirst("&", "?"));
         getServletContext().getRequestDispatcher("/details.jsp").forward(request, response);
     }
 
