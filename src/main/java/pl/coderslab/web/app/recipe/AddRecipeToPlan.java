@@ -1,4 +1,4 @@
-package pl.coderslab.web;
+package pl.coderslab.web.app.recipe;
 
 import pl.coderslab.dao.DayNameDao;
 import pl.coderslab.dao.PlanDao;
@@ -21,13 +21,7 @@ import java.sql.ResultSet;
 
 import java.util.List;
 
-/*Po wejściu metodą POST na adres /app/recipe/plan/add ,
- aplikacja powinna:
 
-pobrać dane, a nastepnie zapisać je przy pomocy klasy Dao do bazy,
-przekierować użytkownika na adres /app/recipe/plan/add,
-umożliwiając tym samym dodanie kolejnego przepisu do planu.
-*/
 @WebServlet("/app/recipe/plan/add")
 public class AddRecipeToPlan extends HttpServlet {
 

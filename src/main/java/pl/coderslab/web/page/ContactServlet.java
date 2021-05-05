@@ -1,4 +1,4 @@
-package pl.coderslab.web;
+package pl.coderslab.web.page;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,13 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/about")
-public class AboutServlet extends HttpServlet {
+@WebServlet("/contact")
+public class ContactServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        getServletContext().getRequestDispatcher("/about.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/contact.jsp").forward(req, resp);
 
     }
 }

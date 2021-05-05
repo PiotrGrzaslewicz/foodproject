@@ -1,4 +1,4 @@
-package pl.coderslab.web;
+package pl.coderslab.web.page;
 
 import pl.coderslab.dao.RecipeDAO;
 import pl.coderslab.model.Recipe;

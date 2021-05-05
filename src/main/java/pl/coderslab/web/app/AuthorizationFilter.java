@@ -1,4 +1,4 @@
-package pl.coderslab.web;
+package pl.coderslab.web.app;
 
 import javax.servlet.*;
 import javax.servlet.annotation.*;
