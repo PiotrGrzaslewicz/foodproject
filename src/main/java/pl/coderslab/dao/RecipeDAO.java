@@ -76,7 +76,9 @@ public class RecipeDAO {
     public List<Recipe> findAllByAdmin(int adminId) {
         List<Recipe> allRecipesByAdmin = new ArrayList<>();
 
-        try (PreparedStatement stmt = DbUtil.getConnection().prepareStatement(FIND_ALL_RECIPES_BY_ADMIN_QUERY);
+
+        try (Connection conn = DbUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(FIND_ALL_RECIPES_BY_ADMIN_QUERY);
         ) {
             stmt.setInt(1, adminId);
             ResultSet resultSet = stmt.executeQuery();
@@ -189,7 +191,9 @@ public class RecipeDAO {
 
     public int numberOfRecipes(){
         String sql = "SELECT COUNT(id) AS 'count' FROM recipe";
-        try(PreparedStatement stmt = DbUtil.getConnection().prepareStatement(sql)){
+
+        try(Connection conn = DbUtil.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
             ResultSet set = stmt.executeQuery();
             if(set.next()) return set.getInt("count");
         }catch (SQLException e){
@@ -201,7 +205,9 @@ public class RecipeDAO {
     public List<Recipe> getWithLimit(int limit, int offset){
         String sql = "SELECT * FROM recipe ORDER BY updated desc LIMIT ? OFFSET ?";
         List<Recipe> list = new ArrayList<>();
-        try(PreparedStatement stmt = DbUtil.getConnection().prepareStatement(sql)){
+
+        try(Connection conn = DbUtil.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
             stmt.setInt(1, limit);
             stmt.setInt(2, offset);
             ResultSet set = stmt.executeQuery();

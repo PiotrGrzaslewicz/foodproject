@@ -2,6 +2,7 @@ package pl.coderslab.utils;
 
 import com.google.common.base.CaseFormat;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.*;
@@ -35,7 +36,9 @@ public class Search<T> {
             sql += name + searchParams + " OR ";
         }
         sql = sql.substring(0, sql.length() - 4);
-        try (PreparedStatement stmt = DbUtil.getConnection().prepareStatement(sql)) {
+
+        try (Connection conn = DbUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
             ResultSet set = stmt.executeQuery();
             list = factory.getAsList(set);
         } catch (Exception e) {
@@ -51,7 +54,7 @@ public class Search<T> {
 
     private List<T> sortByHitCount(List<T> list, String[] colNames, String[] tokens) {
         Map<T, Integer> map = new HashMap<>();
-        for (T n : list){
+        for (T n : list) {
             map.put(n, getHitsInRow(n, colNames, tokens));
         }
         list.sort((a, b) -> map.get(b) - map.get(a));
