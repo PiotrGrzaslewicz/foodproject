@@ -34,8 +34,8 @@ CREATE TABLE IF NOT EXISTS `scrumlab`.`recipe` (
   `preparation` TEXT NULL COMMENT 'Sposób przygotowania.',
   `admin_id` INT NOT NULL COMMENT 'Klucz obcy tabeli admins.',
   PRIMARY KEY (`id`),
-  INDEX `fk_recipie_admins1_idx` (`admin_id` ASC),
-  CONSTRAINT `fk_recipie_admins1`
+  INDEX `fk_recipe_admins1_idx` (`admin_id` ASC),
+  CONSTRAINT `fk_recipe_admins1`
     FOREIGN KEY (`admin_id`)
     REFERENCES `scrumlab`.`admins` (`id`)
     ON DELETE NO ACTION
@@ -93,8 +93,8 @@ CREATE TABLE IF NOT EXISTS `scrumlab`.`recipe_plan` (
   CONSTRAINT `fk_recipe_plan_recipe1`
     FOREIGN KEY (`recipe_id`)
     REFERENCES `scrumlab`.`recipe` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_recipe_day_day_name1`
     FOREIGN KEY (`day_name_id`)
     REFERENCES `scrumlab`.`day_name` (`id`)
@@ -103,8 +103,8 @@ CREATE TABLE IF NOT EXISTS `scrumlab`.`recipe_plan` (
   CONSTRAINT `fk_recipe_plan_plan1`
     FOREIGN KEY (`plan_id`)
     REFERENCES `scrumlab`.`plan` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 COMMENT = 'Tabela zawierająca informacje o połączeniu przepisu oraz planu.';
 
